@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Cabecera del archivo. Van los linkeos a los JS, CSS, etc -->
+    <meta charset="UTF-8">
+    <!--Dice el juego de caracteres que usa la pagina. Que letras usa el idioma de la pag-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!-- Viewport: La parte visible de la pagina en el momento que la estoy usando -->
+    <meta type="description" content="">
+    <!-- Descripcion del objetivo de la pagina. Es la descripcion que tiene la pagina al googlearla. SEO: Search Engine Optimization, te muestra respuestas a busquedas concretas (Microdata) -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title><!-- Titulo de la pag. Sale en la pestaña y en las busquedas de navegadores -->
+    <style>
+        span {
+            color: blue;
+        }
+
+        div {
+            background: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Todo lo de la pagina va en el cuerpo de la pagina. Todo lo que se escribe en el body no toma formato ni de espacios ni saltos de linea -->
+    <div>
+        Esto es un div.
+    </div>
+
+    <span>
+        Esto es un span.
+    </span>
+
+    <div>
+        <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. <span>Suscipit harum aliquam repellat voluptate
+                eligendi cum quis et quam fuga deserunt dignissimos</span>, minus aliquid. Eum assumenda a aliquid
+            distinctio illo facilis.
+        </p>
+    </div>
+
+    <h1>Esto es un h1</h1>
+    <h2>Esto es un h2</h2>
+
+    <ol>
+        <li>Coca</li>
+        <ul>
+            <li>Coca</li>
+            <li>Fanta</li>
+            <li>Sprite</li>
+        </ul>
+        <li>Pepsi</li>
+    </ol>
+
+    <dl>
+        <dt>Visual Basic
+        <dd>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit in corporis doloribus a eum veniam ea nisi,
+            odit ipsum earum et omnis temporibus quo aperiam aut deleniti odio, ut numquam.
+        </dd>
+        </dt>
+
+        <dt>C#</dt>
+        <dd>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quam similique dolores recusandae sint
+            aperiam quaerat! Distinctio aliquid, praesentium cupiditate aliquam voluptate laudantium quod accusantium
+            neque tempora ut doloribus. Labore.</dd>
+    </dl>
+
+    <table border="1px">
+        <thead>
+            <!-- Encabezado de la tabla -->
+            <tr>
+                <!-- Table row -->
+                <th colspan="3">Materias</th><!-- Table header -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Cuerpo de la tabla -->
+            <tr>
+                <td>Programacion 1</td><!-- Table data -->
+                <td>Programacion 2</td>
+                <td>Programacion 3</td>
+            </tr>
+            <tr>
+                <td rowspan="2">7</td>
+                <td>8</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>6</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <img src="../../images/logoHTML5.jpg" alt="logo de html5" title="LOGO HTML 5"><!-- Alt: Descripcion que aparece si no carga la imagen. Title: Texto que aparece al scrollear sobre una imagen -->
+
+    <pre><!-- Muestra el texto formateado igual que como esta escrito -->
+        <code>
+            function Saludar()
+            {
+                console.log("Hola Mundo");
+            }
+        </code>
+    </pre>
+
+    <video src="../../media/video.mp4" poster="../../images/fotoNaturaleza.jpg" controls width="500px"></video>
+</body>
+
+</html>
