@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Formularios</h1>
+    <!-- Atributos importantes de etiqueta: ID: tiene que ser unico por control para poder apuntar a ese control desde js o css; NAME= el nombre es lo que se usa para recuperar valores desde el servidor (name = valor). Solo viaja el nombre al servidor., CLASS -->
+    <form id="frm1" action="#" method="GET"><!-- Si la pag no esta al enviar datos tira error -->
+        
+        <fieldset><!-- Groupbox -->
+            <legend>Datos personales</legend><!-- Titulo del GroupBox -->
+            <p><label for="txtNombre">Nombre:</label>
+            <input type="text" id="txtNombre" placeholder="Ingrese su nombre" required readonly disabled></p>
+            <label for="txtPass">Clave:</label>
+            <input type="password" id="txtPass">
+        </fieldset>
+
+
+        <p><label for="txtNombre">Nombre:</label> <!-- El for hace que se asocie un control a otro -->
+        <input type="text" id="txtNombre" placeholder="Ingrese su nombre" required readonly disabled></p><!-- Placeholder: Texto default gris que esta encima antes de escribir. Required: Obliga a que el campo sea completado antes de ser enviado. Readonly: No permite ingresar datos. Disabled: No permite seleccionar el input -->
+        <label for="txtPass">Clave:</label>
+        <input type="password" id="txtPass"><!-- Cambiar el input type cambia la manera en la que se ven los datos ingresados -->
+        <p><label>Email:</label>
+        <input type="email" name="email" id="txtEmail"></p>
+        <p><label>Edad:</label>
+        <input type="number" name="edad" id="txtEdad" min="1" max="10" value="5"></p><!-- Input que permite incrementar el valor. min: minimo; max: maximo; value: valor default -->
+        <p><label>Foto:</label>
+        <input type="file" name="foto" id="txtFoto" accept="image/*"></p><!-- Input que permite acceder al sistema de archivos y cargar uno -->
+        <p><label>Fecha:</label>
+        <input type="date" name="fecha" id="txtFecha"> <!-- Calendario -->
+        <p></p><input type="button" value="Boton"> <!--  -->
+        <input type="submit" value="Enviar Datos"><!-- Como es un boton submit por default tiene la palabra enviar -->
+        <input type="reset"> <!-- Por default tiene como valor reestablecer. Al clickearlo limpia todos los forms de la pag. Es un comportamiento incorporado por default -->
+        <button>Enviar Formulario</button><!-- Todos los botones en un formulario por default tienen el comportamiento del Submit. No hay diferencia entre button y submit (Estando button dentro de un formulario) -->
+
+        <p></p>
+        <select name="" id=""> <!-- Combo box -->
+            <optgroup label="Lenguajes 1">
+                <option value="0">C#</option><!-- Opcion del combo box -->
+                <option value="1">Visual Basic</option>
+            </optgroup>
+            
+            <optgroup label="Lenguajes 2">
+            <option value="2">JavaScript</option>
+            <option value="3">Java</option>
+        </optgroup>
+        </select>
+        <br>
+
+        <label>Nada: <input type="checkbox" name="" id="" disabled></label><br>
+        <label>Bicicleta: <input type="checkbox" name="" id="" ></label><br>
+        <label>Patina: <input type="checkbox" name="" id="" ></label><br>
+
+        <fieldset>
+            <legend>Sexo</legend>
+            <label>Masculino <input type="radio" name="sexo" id="M"></label> <!-- Que tengan el mismo nombre los hace excluyentes a ambos -->
+            <label>Femenino <input type="radio" name="sexo" id="F"></label>
+        </fieldset>
+
+        <label>Comentarios</label>
+        <br>
+        <textarea name="comentarios" cols="30" rows="10"></textarea>
+
+        <h2>Lab III UTN-FRA todos los derechos reservados &copy;</h2> <!-- Caracteres especiales van con & (Pueden copiarse de internet) -->
+
+        <p>E = m * c<sup>2</sup></p> <!-- Sup: Potencia -->
+        <p>H<sub>2</sub>O</p> <!-- Sub: numero de abajo -->
+
+        <p><u>Esto esta subrayado</u></p>
+        <p><mark>Esto esta resaltado</mark></p>
+        <p><del>Esto esta tachado</del></p>
+
+
+
+
+                <script>
+                    var txtNombre = document.getElementById('txtNombre'); //Permite que la referencia a ese label siempre este guardada en la var
+                    var frm = document.getElementById('frm1'); //Obtengo la referencia al formulario
+                    frm.addEventListener('submit', (e) =>          //Le agrego un escuchuchador de eventos al form. Cuando se ejecuta el evento submit del formulario, se triggerea la funcion manejarSubmit. //Todas reciben un parametro del tipo evento. No tengo que aclarar de que tipo es la variable. e trae info del evento que se esta llamando
+                    {                                               //Funcion flecha doble, igual que la anonima pero sin escribir el function
+                        e.preventDefault();                         //Corta el comportamiento default que tiene el evento submit
+
+                        alert("Maneje el submit");
+                    });
+
+                    /*
+                    frm.addEventListener('submit', function (e)      //Funcion anonima: Funcion escrita y desarrollada como parametro de otra funcion
+                    {
+                        e.preventDefault();
+            
+                       alert("Maneje el submit");
+                    });
+                    */
+                </script>
+
+    </form>
+</body>
+
+</html>
