@@ -34,14 +34,14 @@
         <input type="file" name="foto" id="txtFoto" accept="image/*"></p><!-- Input que permite acceder al sistema de archivos y cargar uno -->
         <p><label>Fecha:</label>
         <input type="date" name="fecha" id="txtFecha"> <!-- Calendario -->
-        <p></p><input type="button" value="Boton"> <!--  -->
+        <p></p><input type="button" value="Boton">
         <input type="submit" value="Enviar Datos"><!-- Como es un boton submit por default tiene la palabra enviar -->
         <input type="reset"> <!-- Por default tiene como valor reestablecer. Al clickearlo limpia todos los forms de la pag. Es un comportamiento incorporado por default -->
         <button>Enviar Formulario</button><!-- Todos los botones en un formulario por default tienen el comportamiento del Submit. No hay diferencia entre button y submit (Estando button dentro de un formulario) -->
 
         <p></p>
         <select name="" id=""> <!-- Combo box -->
-            <optgroup label="Lenguajes 1">
+            <optgroup label="Lenguajes 1"><!-- Separador de categoria -->
                 <option value="0">C#</option><!-- Opcion del combo box -->
                 <option value="1">Visual Basic</option>
             </optgroup>
@@ -59,13 +59,13 @@
 
         <fieldset>
             <legend>Sexo</legend>
-            <label>Masculino <input type="radio" name="sexo" id="M"></label> <!-- Que tengan el mismo nombre los hace excluyentes a ambos -->
-            <label>Femenino <input type="radio" name="sexo" id="F"></label>
+            <label>Masculino <input type="radio" name="sexo" id="M"></label> <!-- RadioButton: Que tengan el mismo nombre los hace excluyentes a ambos -->
+            <label>Femenino <input type="radio" name="sexo" id="F"></label> <!-- RadioButton: Que tengan el mismo nombre los hace excluyentes a ambos -->
         </fieldset>
 
         <label>Comentarios</label>
         <br>
-        <textarea name="comentarios" cols="30" rows="10"></textarea>
+        <textarea name="comentarios" cols="30" rows="10"></textarea><!-- TextBox con ese tamaño default. Se puede cambiar el tamaño -->
 
         <h2>Lab III UTN-FRA todos los derechos reservados &copy;</h2> <!-- Caracteres especiales van con & (Pueden copiarse de internet) -->
 
