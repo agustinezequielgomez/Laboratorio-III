@@ -1,0 +1,61 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul
+{
+    list-style-type: none;
+}
+
+ul li
+{
+    background-color: lightblue;
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    border-right: 4px gray solid;
+}
+
+ul li:last-child
+{
+    border-right: none;
+}
+
+ul li:hover
+{
+    background-color: blue;
+}
+
+ul li a
+{
+    text-decoration: none;
+    color: white;
+    display:block;
+    text-align: center;
+}
+
+@media only screen and (min-width: 500px) /*Permite modificar el tamaño de los controles dependiendo en el tamaño del viewport (util para multiples dispostivios)*/
+{
+    ul li
+    {
+        float: none;
+        border-right: none;
+        border-bottom: 4px solid gray;
+        position: relative; /*¿?*/
+        left: -150px; /*Muevo el margen del control 150px a la izquierda*/
+        transition: left 2s; /*Se aplica una transicion al cambion de posicion de left (cuando va de -150px a 0 px). El tiempo es lo que tarda en hacer esa transicion*/
+    }
+
+    ul li:last-child
+    {
+        border-bottom: none;
+    }
+
+    ul li:hover
+    {
+        left: 0px; /*Al hacer hover vuelve a su posicion inicial*/
+    }
+}

@@ -1,0 +1,29 @@
+div
+{
+    width: 100px;
+    height: 100px;
+    background-color:rgba(255, 0, 0 , 1);
+    position: absolute;
+    z-index: -2;
+    /*position: relative; /*Por default es static: Va a estar en donde el flujo de HTML le indica que tiene que estar. No importa si se lo reposiciona por CSS. 
+    Para moverlo hay que usar algo distinto a static (relative for ex). Relative se mueve respecto de su posicion original estatica de HTML
+    Sticky: Se queda fijo en el viewport en su posicion por mas que scrollees*/
+    /*top: 25px;
+    left: 25px;*/
+}
+
+.interno
+{
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    position: absolute; /*El posicionamiento es relativo al acentstro mas cercano que tenga una posicion. En este caso, como el otro div no tiene posicion custom (es la estatica) se ajusta su posicion a la de la pagina*/
+    top: 10px;
+    left: 10px;
+    z-index: -1; /*z-index: Profundidad. El que tenga mas z index va a estar por arriba*/
+}
+
+body
+{
+    height: 1000px;
+}

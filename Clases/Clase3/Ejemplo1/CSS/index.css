@@ -1,0 +1,18 @@
+#miParrafo
+{
+    color:rgb(255,0,0);
+}
+
+#miDiv
+{
+    background-color:rgba(145,0,0,5);
+    height: 100px;
+    width: 100px;
+}
+
+p 
+{
+    color:#0000FF;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+}

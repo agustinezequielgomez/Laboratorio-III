@@ -1,0 +1,48 @@
+table,th,tr,td
+{
+    border:2px black solid;
+    border-collapse: collapse; /*Colapsa los bordes de la tabla y muestra uno solo*/
+}
+
+table
+{
+    width: 2000px;
+}
+
+tr:nth-child(even)/*Intercala el estilo en todas las filas de la tabla. El even es para hacerlo en las filas pares, odd para impar*/
+{
+    background-color: rgba(255, 10, 10, 0.8);
+}
+
+tr:nth-child(even) /*Aplica el estilo en todas las filas pares al scrollear por encima*/
+{
+    background-color: rgba(255, 10, 10, 0.3);
+    transition: background-color 1s ease-in-out; /*Transicion lineal: siempre lleva la misma velocidad. Con el ease in/out o in out se vuelve una transicion dinamica*/
+}
+
+td
+{
+    height: 50px;
+    text-align: center; 
+    vertical-align: top; /*Alinea el contenido verticalmente contra el borde superior, inferior o centrado*/
+}
+
+th
+{
+    padding: 10px;
+}
+
+tr:hover
+{
+    background-color: rgba(0, 245, 10, 1);    
+}
+
+.overflowx /*Hace referencia a la clase container del div*/
+{
+    overflow-x:scroll;
+}
+
+.overflowy
+{
+    overflow-y: hidden;
+}
