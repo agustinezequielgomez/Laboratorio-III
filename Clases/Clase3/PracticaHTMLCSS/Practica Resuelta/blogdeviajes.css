@@ -1,0 +1,34 @@
+#Logo
+{
+    position: relative;
+    left: 15%;
+    top: 10px;
+}
+
+#DivHeader
+{
+    background-color: rgb(219,0,142);
+    margin-top: 2%;
+    padding: 1.5%;
+}
+
+#SpanBotonesHeader
+{
+    margin-left: 15%;
+}
+
+.BotonHeader
+{
+    background-color: rgb(219,0,142);
+    border: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    font-weight: bold;
+    padding: 1.5% 5% 1.5% 5%;
+    text-decoration: none;
+}
+
+.BotonHeader:hover
+{
+    background-color: aqua;
+}
