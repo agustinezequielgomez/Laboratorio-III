@@ -1,34 +1,187 @@
-#Logo
+#Logo 
 {
     position: relative;
-    left: 15%;
-    top: 10px;
+    left: 15vw;
+    top: 0.5vw;
 }
 
-#DivHeader
+header
 {
-    background-color: rgb(219,0,142);
-    margin-top: 2%;
-    padding: 1.5%;
+    margin-bottom: 3vw;
 }
 
-#SpanBotonesHeader
+body 
 {
-    margin-left: 15%;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
 }
 
-.BotonHeader
+.navbar
 {
-    background-color: rgb(219,0,142);
-    border: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-left: 15vw;
+}
+
+.BarraVioleta 
+{
+    margin-top: 1vw;
+    overflow: hidden;
+    background-color: rgb(219, 0, 142);
+}
+
+.BarraVioleta a 
+{
+    float: left;
+    font-size: 0.9vw;
     color: white;
-    font-weight: bold;
-    padding: 1.5% 5% 1.5% 5%;
+    text-align: center;
+    padding: 1vw;
+    width: 8vw;
     text-decoration: none;
+    font-weight: bold;
 }
 
-.BotonHeader:hover
+.dropdown 
+{
+    float: left;
+}
+
+.dropdown .dropbtn 
+{
+    font-size: 0.9vw;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: inherit;
+    font-family: inherit;
+    padding: 1vw;
+    width: 10vw;
+    font-weight: bold;
+    margin: 0;
+}
+
+.BarraVioleta a:hover, .dropdown:hover .dropbtn 
 {
     background-color: aqua;
+    transition: background-color 0.1s ease-in-out;
+}
+
+.dropdown-content 
+{
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 255, 255, 0.5);
+    width: 10%;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a 
+{
+    font-size: 0.8vw;
+    float: none;
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.dropdown-content a:hover 
+{
+    background-color:aqua ;
+}
+
+.dropdown:hover .dropdown-content 
+{
+    display: block;
+    transition: display 5s ease-in-out;
+}
+
+.Titulos
+{
+    color: aqua;
+    display: inline;
+}
+
+.Contenido
+{
+    padding-left: 15vw;
+}
+
+.Parrafo
+{
+    max-width: 45vw;
+    padding-left: 15vw;
+    line-height: 1.7vw;
+}
+
+.ImgBody
+{
+    margin-right: 1vw;
+    width: 20vw;
+    float:left;
+}
+
+.LeerMas
+{    
+    border: none;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    background-color: aqua;
+    padding: 0.5vw 1vw 0.5vw 1vw;
+    cursor: pointer;
+}
+
+.Destinos
+{
+    margin-right: 5vw;
+}
+
+.OtrosPosts
+{
+    position: absolute;
+    float: right;
+}
+
+.Footer
+{
+    background-color: rgb(219, 0, 142);
+    margin-bottom: 0;
+    overflow: hidden;
+}
+
+.DivFooter
+{
+    margin-left: 15vw;
+}
+
+.DivDescripcion
+{
+    width: 25vw;
+    float: left;
+}
+
+.DivBotones
+{
+    float: right;
+    margin-right: 30vw;
+}
+
+.Footer .BarraVioleta a
+{
+    font-size: 0.7vw;
+    padding: 0.5vw;
+    width: 3vw;
+}
+
+#TituloFooter, #LoremFooter, #Marca
+{
+    color: white;
+}
+
+#Marca
+{
+    position: relative;
+    margin-top: 10vw;
 }
