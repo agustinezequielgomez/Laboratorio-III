@@ -1,0 +1,187 @@
+#Logo 
+{
+    position: relative;
+    left: 15em;
+    top: 0.5em;
+}
+
+header
+{
+    margin-bottom: 3em;
+}
+
+body 
+{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+.navbar
+{
+    padding-left: 15em;
+}
+
+.BarraVioleta 
+{
+    margin-top: 1em;
+    overflow: hidden;
+    background-color: rgb(219, 0, 142);
+}
+
+.BarraVioleta a 
+{
+    float: left;
+    font-size: 0.9em;
+    color: white;
+    text-align: center;
+    padding: 1em;
+    width: 8em;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.dropdown 
+{
+    float: left;
+}
+
+.dropdown .dropbtn 
+{
+    font-size: 0.9em;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: inherit;
+    font-family: inherit;
+    padding: 1em;
+    width: 10em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.BarraVioleta a:hover, .dropdown:hover .dropbtn 
+{
+    background-color: aqua;
+    transition: background-color 0.1s ease-in-out;
+}
+
+.dropdown-content 
+{
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 255, 255, 0.5);
+    width: 10%;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a 
+{
+    font-size: 0.8em;
+    float: none;
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.dropdown-content a:hover 
+{
+    background-color:aqua ;
+}
+
+.dropdown:hover .dropdown-content 
+{
+    display: block;
+    transition: display 5s ease-in-out;
+}
+
+.Titulos
+{
+    color: aqua;
+    display: inline;
+}
+
+.Contenido
+{
+    padding-left: 15em;
+}
+
+.Parrafo
+{
+    max-width: 45em;
+    padding-left: 15em;
+    line-height: 1.7em;
+}
+
+.ImgBody
+{
+    margin-right: 1em;
+    width: 20em;
+    float:left;
+}
+
+.LeerMas
+{    
+    border: none;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    background-color: aqua;
+    padding: 0.5em 1em 0.5em 1em;
+    cursor: pointer;
+}
+
+.Destinos
+{
+    margin-right: 5em;
+}
+
+.OtrosPosts
+{
+    position: absolute;
+    float: right;
+}
+
+.Footer
+{
+    background-color: rgb(219, 0, 142);
+    margin-bottom: 0;
+    overflow: hidden;
+}
+
+.DivFooter
+{
+    margin-left: 15em;
+}
+
+.DivDescripcion
+{
+    width: 25em;
+    float: left;
+}
+
+.DivBotones
+{
+    float: right;
+    margin-right: 30em;
+}
+
+.Footer .BarraVioleta a
+{
+    font-size: 0.7em;
+    padding: 0.5em;
+    width: 3em;
+}
+
+#TituloFooter, #LoremFooter, #Marca
+{
+    color: white;
+}
+
+#Marca
+{
+    position: relative;
+    margin-top: 10em;
+}
