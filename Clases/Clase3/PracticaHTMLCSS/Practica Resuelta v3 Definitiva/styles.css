@@ -1,0 +1,205 @@
+*
+{
+    margin: 0em;
+    padding: 0em;
+}
+
+#Logo, header nav, main, footer
+{
+    padding: 0 20em;
+}
+
+#Logo
+{
+    margin-bottom: 1em;
+}
+
+nav, footer
+{
+    background-color: rgb(219, 0, 142);
+    display:flex;
+}
+
+.ButtonNav
+{
+    border: 0;
+    background: none;
+}
+
+nav a, #Logo
+{
+    box-sizing: border-box;
+}
+
+a
+{
+    text-decoration: none;
+}
+
+nav a, .ButtonNav
+{
+    font-size: 1em;    
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    width: 12em;
+    min-width: 7em;
+    padding: 1em;
+    text-align: center;
+}
+  
+  .DropContent {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 255, 255, 0.753);
+    margin-top: 1em;
+    width: 12em;
+    min-width: 7em;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .DropContent a 
+  {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin: 0;
+  }
+  
+  .DropContent a:hover 
+  {
+      background-color: rgb(0, 162, 255);
+      transition: background-color 1.2s;
+  }
+  
+  .ButtonNav:hover .DropContent {
+    display: block;
+  }
+  
+  .ButtonNav:hover, nav a:hover
+  {
+    background-color: aqua;
+    transition: background-color 0.5s;
+  }
+
+#DivArticulos
+{
+    max-width: 190em;
+}
+
+  .ImgArticulo
+  {
+      width: 20em;
+      float: left;
+      margin-right: 1em;  
+  }
+
+.BotonArticulo
+{
+    border: 0;
+    background-color: aqua;
+    padding: 0.5em 1.5em;
+    margin-top: 1em;
+    font-size: 0.9em;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 1em;
+    cursor: pointer;
+}
+
+p, .BotonArticulo, h2, nav a, .ButtonNav, #OtrosPosts a, .BotonesFooter
+{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main h2
+{
+    color: aqua;
+}
+
+#Artiuclos
+{
+    float: left;
+    max-width: 50em;
+}
+
+main
+{
+    display: flex;
+    box-sizing: content-box;
+    margin-top: 2em;      
+}
+
+#OtrosPosts
+{
+    box-sizing: content-box;
+    margin-left: 5em;
+}
+
+  #OtrosPosts a
+  {
+      display: flex;
+      padding: 0.8em 0;
+      padding-left: 1em;
+      padding-right: 15em;
+      text-decoration: none;
+      color: black;
+  }
+
+  #OtrosPosts a:hover
+  {
+      background-color:aqua;
+      transition: background-color 1s;
+  }
+
+  #TextoFooter
+  {
+      margin: 2em 0;
+      max-width: 30em;
+      max-height: 13em;
+  }
+
+  #LoremFooter
+  {
+      display:flex;
+      max-height: 13em;
+  }
+  footer
+  {
+      display:flex;
+      box-sizing: content-box;
+  }
+
+  #TextoFooter h2, #TextoFooter p, #CopyRight
+  {
+      color: white;
+  }
+
+  #CopyRight
+  {
+      margin-top: 17em;
+      margin-left: -2em;
+      margin-bottom: 1em;
+      font-size: 0.965em;
+  }
+
+  .BotonesFooter
+  {
+      padding: 1em;
+      text-decoration: none;
+      color:white;
+      font-weight: bold;
+  }
+
+  .BotonesFooter:hover
+  {
+      background-color: aqua;
+  }
+
+  #MenuFooter
+  {
+      min-width: 28em;
+      margin-top: 2em;
+  }
