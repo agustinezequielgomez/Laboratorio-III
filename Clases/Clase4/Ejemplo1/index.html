@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./script.js"></script>  Linkeo el JS. Al linkear se ejecuta el contenido que tenga dentro antes de inlcuso renderizar el HTML -->
+    <title>Document</title>
+    <!--  <script>
+            alert("Hola mundo"); //Se ejecuta de una el script que encuentre el navegador (A menos que este dentro de una funcion)
+    </script> -->
+</head>
+<body>
+   <!-- <h1>Esto es un titulo</h1>
+    <script>
+        function Saludar()
+        {
+            alert("Hola mundo");
+        }
+            Saludar();
+    </script> -->
+
+
+    <!--<h1 onclick="Saludar();">Esto es un h1</h1>  onclick="Saludar();" Al hacer click en el h1 se ejecuta la funcion. esta mal porque estoy embebiendo JS en HTML -->
+    <p id="p1">Esto es un p1</p>
+
+    <div id="miDiv"></div>
+
+    <!--<script src="./script.js"></script> <!-- Se pone al final del body para que su codigo se ejecute una vez que se renderizaron los tags de HTML -->
+
+    <!-- <script>
+        var x = 2;
+        console.log(typeof(x)); //Dice el tipo de objeto que es la variable
+    </script> --> 
+
+
+    <!--<script>
+        // var x = function(a) Asigno funcion a variable. Le puedo sacar el nombre a la variable y es funcion anonima, se puede ejecutar porque se asiguna a una variable
+        //console.log(x()) Ejecuto funcion a traves de la variable. Con los ()  estoy ejecutando X, y X tiene almacenada la variable
+        
+        
+        /*function x(a, b, c) 
+        {//Le puedo pasar parametros pero no tengo que usar todos los metodos obligatoriamente ni pasarlos en la invocacion. Basicamente JS hace lo que se le canta el ogt y te arreglas viste
+            console.log(arguments.length); //Me dice la cantidad de argumentos pasados. Incluso puedo pasarle mas argumentos de los que la funcion recibe en un principio
+        }
+
+        x(3,5,6);*/
+
+
+        function x(a, b, c)
+        {
+            /*for(var i=0; i<arguments.length; i++)
+            {
+                console.log(arguments[i]);
+            }*/
+
+            /*if(a && b) //Checkea que las variables no sean nulas. En base a eso ejecuto o no la funcion
+            {
+                return a + b;
+            }*/
+
+            if(!c)
+            {
+                c = 0;
+            }
+            return a + b +c;
+
+        }
+
+        console.log(x(1,2));
+
+    </script>-->
+    
+    <script>
+        function calcular(a, b, c)
+        {
+            return c(a, b); //Calback
+        }
+
+        console.log(calcular(5, 6, function(a,b){
+            return a+b;
+        }))
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./script.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <!--<script>
+        var x = { nombre: "Juan", apellido: "Perez", Edad: 30 }; //Similar a JSON ya que estoy construyendo un obj en JS   
+        x.dni = 2232; //Le estoy agregando una prop al objeto ya creado
+        console.log(x["nombre"]);
+        console.log(x.nombre);
+        console.log(x.dni); 
+
+        function Persona(nombre, apellido, edad) //Construyo el obj creando los atributos y asignandolos
+        {
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.edad = edad;
+            this.mostrarNombre = function(){
+           return this.nombre + " " + this.apellido
+            };
+        }
+        var y = new Persona("Ana","Gomez",45);
+        console.log(y.mostrarNombre());
+        var per1 = new Persona("Juan","Perez",30);
+        console.log(per1.mostrarNombre());
+
+        console.log("---------------------------------------");
+        for(prop in per1) //Recorro los atributos del objeto indicado y muestro sus valores
+        {
+            console.log(per1[prop]);
+        }
+
+        Persona.prototype.nacionalidad = ""; //Agrego un atributo fijo para todos los objetos de esa clase. Lo que va despoues del = es el valor default
+        per1.nacionalidad = "Argentina";
+        
+        console.log("---------------------------------------");
+        for(prop in y) //Recorro los atributos del objeto indicado y muestro sus valores
+        {
+            console.log(y[prop]); //A y se le agrega el valor vacio nacionalidad aunque ya lo cree anteriormente porque use el prototype
+        }
+
+        console.log("---------------------------------------");
+        for(prop in per1) //Recorro los atributos del objeto indicado y muestro los nombres del atributo
+        {
+            console.log(prop);
+        }
+        console.log("---------------------------------------");
+
+        for(prop in per1)
+        {
+            if((typeof per1[prop]) == "function")
+            {
+                console.log(per1[prop]());
+            }
+        }
+    </script> -->
+    
+    <!--<p id="p1" onclick="this.innerHTML = 'Cambie el texto';" onmouseover="this.style.color= 'blue';" onmouseout="this.style.color= 'red';">Esto es un parrafo</p>
+    Cambio de estilos por JS y no CSS. ESTO NO DEBE HACERSE
+
+    <script>
+        function cambiarTexto() {
+
+        }
+
+        function cambiarFondo() {
+
+        }
+
+        function cambiarColor() {
+
+        }
+
+    </script> -->
+
+    <p id="p1">Esto es un parrafo</p>
+    <script src="./script.js"></script>
+
+</body>
+
+</html>

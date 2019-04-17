@@ -183,6 +183,7 @@ main
       margin-left: -2em;
       margin-bottom: 1em;
       font-size: 0.965em;
+      box-sizing: content-box;
   }
 
   .BotonesFooter
