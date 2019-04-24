@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Lenguajes</h2>
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JAVASCRIPT</li>
+    </ul>
+
+    <button id="btnEjecutar">Ejecutar</button>
+    <script>
+        var btn = document.getElementById("btnEjecutar");
+        btn.addEventListener('click',ejecutar);
+
+        function ejecutar()
+        {
+            //console.log("Hola mundo");
+            var lista = document.getElementsByTagName('ul')[0]; //Devuelve un array con todos los elementos que tienen ese nombre de etiqueta (Array que tiene referencia a los punteros de todas las listas ul del documento)
+            var hijos = lista.children; //Traigo todos los li
+            console.log(lista); //Los elementos pueden ser padres de muchos. Los text elements no pueden ser padres de nada
+
+            console.log(lista.childElementCount); //Devuelve la cantdidad de elementos hijos. En este caso como la lista tiene 3 li devuelve 3.
+            console.log(lista.children); //Array de lista de elementos hijos (trae todos los nodos los elementos).
+            console.log(lista.childNodes.length); //Tira 7 de resultado porque cuenta los espacios ademas de los li de la lista (Tiene en cuenta los nodos texto ademas de los nodos elementos*/
+
+
+            //childNodes -> Trae todos los nodos hijos != children-> Trae todos los nodos elemento hijos
+            for(var i = 0; i < hijos.length; i++)
+            {
+                //console.log(hijos[i]); Muestro las etiquetas hijas
+                //console.log(hijos[i].childNodes[0].nodeValue); //hijos tiene los 3 li. Con childNodes me traigo los elementos hijos del li (Ya sean texto o no). con .nodeValue traigo el valor de ese elemento hijo sin comillas
+                console.log(hijos[i].textContent); //Con esto traigo todos los textos hijos del elemento (en este caso los li)
+            }
+        }
+    </script>
+</body>
+</html>

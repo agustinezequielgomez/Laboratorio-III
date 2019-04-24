@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Lenguajes</h2>
+    <p id=p1>Parrafo</p>
+
+    <button id="btnEjecutar">Ejecutar</button>
+    <script>
+        var btn = document.getElementById("btnEjecutar");
+        btn.addEventListener('click', ejecutar);
+
+        function ejecutar() {
+            var parrafo = document.getElementById('p1');
+
+            var nodoTexto = document.createTextNode('Hola Mundo');
+
+            parrafo.appendChild(nodoTexto);
+
+            console.log(parrafo.childNodes.length);
+        }
+    </script>
+</body>
+
+</html>

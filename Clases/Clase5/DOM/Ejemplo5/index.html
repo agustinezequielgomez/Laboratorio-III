@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Lenguajes</h2>
+    <div id="miDiv">
+
+    </div>
+
+    <button id="btnEjecutar">Ejecutar</button>
+    <script>
+        var btn = document.getElementById("btnEjecutar");
+        btn.addEventListener('click', ejecutar);
+
+        function ejecutar() 
+        {
+            var div = document.getElementById('miDiv');
+
+            var parrafo =document.createElement('p');
+
+            var texto = document.createTextNode("Hola mundo");
+
+            parrafo.appendChild(texto);
+
+            div.appendChild(parrafo);
+
+            //appendChild != innerHTML. Para agregar un nuevo hijo es appendChild, innerHTML es para poner html y va a pisar a lo ya existente
+        }
+    </script>
+</body>
+
+</html>

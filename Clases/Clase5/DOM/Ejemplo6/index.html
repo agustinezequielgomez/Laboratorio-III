@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Lenguajes</h2>
+    <div id="miDiv"></div>
+
+    <img src="./images/Koala.jpg" alt="Imagen Koala" id="imagen1">
+
+    <button id="btnEjecutar">Ejecutar</button>
+    <script>
+        var btn = document.getElementById("btnEjecutar");
+        btn.addEventListener('click', ejecutar);
+
+        function ejecutar() 
+        {
+            /*
+            var div = document.getElementById('miDiv');
+
+            var imagen = document.createElement('img');
+
+            imagen.setAttribute('src','./images/Koala.jpg');
+            imagen.setAttribute('alt',"Imagen de koala");
+            
+            div.appendChild(imagen);
+            */
+
+            var imagen = document.querySelector('#imagen1'); //Es lo mismo que var imagen = document.getElementById("imagen1"); Lo unico que cambia es como le paso la imagen
+            
+            if(imagen.hasAttribute('src'))
+            {
+                imagen.removeAttribute('src');
+            }
+            else
+            {
+                console.log("No tiene ese atributo");
+            }
+
+            while(parrafo.hasAttribute())
+            {
+                parrafo.removeAttribute(parrafo.lastChildNode);
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Lenguajes</h2>
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JAVASCRIPT</li>
+    </ul>
+
+    <button id="btnEjecutar">Ejecutar</button>
+    <script>
+        var btn = document.getElementById("btnEjecutar");
+        btn.addEventListener('click',ejecutar);
+
+        function ejecutar()
+        {
+            //console.log("Hola mundo");
+            var lista = document.getElementsByTagName('ul')[0]; //Devuelve un array con todos los elementos que tienen ese nombre de etiqueta (Array que tiene referencia a los punteros de todas las listas ul del documento)
+            var hijos = lista.childNodes;
+            console.log(hijos.length);
+
+
+            for(var i = 0; i<hijos.length; i++)
+            {
+                if(hijos[i].nodeType == Node.ELEMENT_NODE) //ELEMENT_NODE tiene el codigo 1. Puedo poner 1 en lugar de ELEMENT_NODE
+                {
+                    console.log(hijos[i].textContent); //Obtengo todos los nodos de la lista (traidos con childNodes) ya sean texto o elementos. El if sirve de filtro para que solo traiga los nodos elemento
+                }
+            }
+
+        }
+    </script>
+</body>
+</html>

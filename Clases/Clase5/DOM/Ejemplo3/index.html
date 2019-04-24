@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Lenguajes</h2>
+    <div>
+        <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JAVASCRIPT</li>
+        </ul>
+    </div>
+
+    <button id="btnEjecutar">Ejecutar</button>
+    <script>
+        var btn = document.getElementById("btnEjecutar");
+        btn.addEventListener('click', ejecutar);
+
+        function ejecutar() {
+            var lista = document.getElementsByTagName('ul')[0];
+            var padre = lista.parentNode;
+            padre.style.backgroundColor = 'blue'; //Si estuviera en CSS seria background-color. Pero el - no esta permitido en el medio de un nombre asi que va cammel case
+            padre.style.display = 'inline-block';
+
+            var primerHijo = lista.firstElementChild; //Firstchild trae el primer hijo sea el nodo que sea. FirstElementchild trae el primer hijo elemento
+            var ultimoHijo = lista.lastElementChild;
+            console.log(primerHijo.textContent);
+
+            while(ultimoHijo !=null)
+            {
+                console.log(ultimoHijo.textContent);
+                ultimoHijo = ultimoHijo.previousElementSibling;
+            }
+
+            console.log("-------------------------------------");
+            while(primerHijo !=null)
+            {
+                console.log(primerHijo.textContent);
+                primerHijo = primerHijo.nextElementSibling;
+            }
+
+        }
+    </script>
+</body>
+
+</html>
