@@ -1,0 +1,29 @@
+#miTabla, .header, .datosBody,td
+{
+    border: 1px solid;
+    border-color: coral;
+    border-collapse: collapse;
+}
+
+tr:nth-child(even)
+{
+    background-color: aqua;
+}
+
+tr:nth-child(even):hover
+{
+    background-color: deepskyblue;
+    transition: background-color 1s;
+}
+
+tr:nth-child(odd):hover
+{
+    background-color: aqua;
+    transition: background-color 1s;
+}
+
+#formulario
+{
+    visibility: hidden;
+}
+
