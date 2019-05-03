@@ -5,12 +5,10 @@ window.addEventListener('load',function()
     for(fila of filas)
     {
         fila.addEventListener('click',seleccionarRegistros);
+        fila.addEventListener('click',desSeleccionarFormulario);
     }
 });
-window.addEventListener('load',function()
-{
-    window.addEventListener('click',desSeleccionarFormulario);
-});
+
 
 function poblarTabla()
 {
@@ -57,7 +55,7 @@ function seleccionarRegistros()
     formulario = document.getElementById("formulario");
     formulario.style.visibility = "visible";
     var hijos = this.children;
-    var labels = ["ID:","Nombre:","Apellido:","Email:","Sexo:","IP:"]
+    var labels = ["ID: ","Nombre: ","Apellido: ","Email: ","Sexo: ","IP: "]
     var div = document.createElement('div');
     for(var i = 0; i< hijos.length; i++)
     {
@@ -71,10 +69,9 @@ function seleccionarRegistros()
 
 function desSeleccionarFormulario()
 {
-    console.log(this);
-    var formulario = document.getElementById("formulario");
-    if(formulario.style.visibility == "visible")
+    var groupBox = document.getElementById("groupBox");
+    if(groupBox.children.length > 2)
     {
-        console.log("AAAAAAAA");
+        groupBox.removeChild(groupBox.children[1]);
     }
 }
