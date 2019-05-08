@@ -28,6 +28,20 @@ function poblarTabla()
     tabla.appendChild(fila);
     
 
+    for(var persona of data)
+    {
+        fila = document.createElement('tr');
+        fila.setAttribute('class','datosBody');
+        for(var datos in persona)
+        {
+            var tableData = document.createElement('td');
+            
+            tableData.append(persona[datos]);
+            fila.appendChild(tableData);
+        }
+        tabla.appendChild(fila);
+    }
+    /*
     data.forEach(function(persona){
         fila = document.createElement('tr');
         fila.setAttribute('class','datosBody');
@@ -46,7 +60,7 @@ function poblarTabla()
             fila.appendChild(tableData);
         }
         tabla.appendChild(fila);
-    });
+    });*/
 }
 
 function seleccionarRegistros()
@@ -55,7 +69,7 @@ function seleccionarRegistros()
     formulario = document.getElementById("formulario");
     formulario.style.visibility = "visible";
     var hijos = this.children;
-    var labels = ["ID: ","Nombre: ","Apellido: ","Email: ","Sexo: ","IP: "]
+    var labels = document.getElementById('header');
     var div = document.createElement('div');
     for(var i = 0; i< hijos.length; i++)
     {
