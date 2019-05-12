@@ -1,0 +1,15 @@
+.borde,td{
+    border: 1px solid salmon;
+    border-collapse: collapse;
+}
+
+table tr:nth-child(even){
+    background-color: cadetblue;
+}
+
+#spinner{
+    position: fixed;
+    top:360px;
+    left: 50%;
+    display: none;
+}

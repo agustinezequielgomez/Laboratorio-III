@@ -14,7 +14,7 @@ function cargarTabla()
     //tabla.setAttribute('class','tabla');
     //tabla.className = "tabla";
     tabla.setAttribute('style','border-collapse:collapse');
-    for(var atributo in personas[0])
+    for(var atributo in personas[0]) //Recorro los atributos de la primer persona con for in
     {
         var th = document.createElement('th');
         cabecera.setAttribute('id','cabecera');
@@ -26,20 +26,31 @@ function cargarTabla()
     tabla.appendChild(cabecera);
     
     
-    for(var i in personas)
+    for(var persona of personas) //Obtengo las personas como objeto individual desde el array con for of
     {
-        /*TERMINAR
-        if(personas[i].lenght > cabecera.childElementCount)
+        var atributosExtra = DetectarAtributos(persona,cabecera.childNodes);
+        if(atributosExtra!=[])
         {
+            for(atributoAgregar of atributosExtra)
+            {
+                th = document.createElement('th');
+                th.appendChild(document.createTextNode(atributoAgregar));
+                cabecera.appendChild(th);
+            }
+        }
+        /*
+        if(Object.keys(persona).length > cabecera.childElementCount)
+        {
+            var diferencia = Object.keys(persona).length - cabecera.childElementCount;
             th = document.createElement('th');
-            th.appendChild((personas[i].lenght-cabecera.childElementCount)+personas[i].lenght)
+            th.appendChild(document.createTextNode(((Object.keys(persona))[Object.keys(persona).length-diferencia])));
             cabecera.appendChild(th);
         }*/
         var fila = document.createElement('tr');
-        for(var j in personas[i])
+        for(var j in persona) //Recorro c/atributo de la persona seleccionada
         {
             var celda = document.createElement('td');
-            var dato = document.createTextNode(personas[i][j]);
+            var dato = document.createTextNode(persona[j]); //uso el atributo como indice para acceder a su valor
             celda.appendChild(dato);
             celda.setAttribute('style','text-align:center');
             fila.appendChild(celda);
@@ -47,4 +58,28 @@ function cargarTabla()
         tabla.appendChild(fila);
     }
     document.getElementById('info').appendChild(tabla);
+}
+
+function DetectarAtributos(objeto,atributos)
+{
+    var keys = Object.keys(objeto);
+    var retorno = [];
+    var flag;
+    for(valor of keys)
+    {
+        flag = false;
+        for(val of atributos)
+        {
+            if(val.innerText == valor)
+            {
+                flag = true;
+                break;
+            }
+        }
+        if(flag == false)
+        {
+            retorno.push(valor);
+        }
+    }
+    return retorno;
 }
