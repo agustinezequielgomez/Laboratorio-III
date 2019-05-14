@@ -48,6 +48,15 @@ function construirTabla(arrayDatos)
 
 function seleccionarRegistro()
 {
+    var body = document.getElementsByTagName('body');
+    for(hijos of body[0].children)
+    {
+        console.log(hijos.nodeName);
+        if(hijos.nodeName == "FORM")
+        {
+            return -1;   
+        }
+    }
     var formulario = document.createElement('form');
     var groupBox = document.createElement('fieldset');
     var legend = document.createElement('legend');
@@ -63,7 +72,7 @@ function seleccionarRegistro()
         var input = document.createElement('input');
         input.setAttribute('value',(this.children[i].innerText));
         input.setAttribute('class','formInputs');
-        if(i == 0)
+        if(cabecera.children[i].innerText == "id")
         {
             input.setAttribute('disabled','true');
         }
@@ -89,6 +98,7 @@ function actualizarRegistro()
         fila.children[i].innerText = inputs[i].value;
     }
     document.body.removeChild(this.parentElement.parentElement);
+    ReArmarTabla();
 }
 
 function buscarRegistro(id)
@@ -128,4 +138,30 @@ function DetectarAtributos(objeto,atributos)
         }
     }
     return retorno;
+}
+
+function ReArmarTabla()
+{
+    var header = document.getElementById('tableHeaeder');
+    var personas = document.getElementsByClassName('personas');
+    var columnas = [];
+    var retorno = "";
+    for(cols of header.children)
+    {
+        columnas.push(cols.innerText);
+    }
+    for(persona of personas)
+    {
+        retorno += "{";
+        for(var i = 0 ; i < columnas.length ; i++)
+        {
+            retorno += columnas[i]+":"+persona.children[i].innerText;
+            if(i+1<columnas.length)
+            {
+                retorno += ",";
+            }
+        }
+        retorno += "},";
+    }
+    console.log(JSON.stringify(retorno));
 }
