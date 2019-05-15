@@ -1,0 +1,48 @@
+.borde,td{
+    border: 1px solid salmon;
+    border-collapse: collapse;
+}
+
+table tr:nth-child(even){
+    background-color: cadetblue;
+}
+
+#spinner{
+    position: fixed;
+    top:360px;
+    left: 50%;
+    display: none;
+}
+
+.frmAlta{
+
+    width: 40%;
+    height: 400px;;
+    position: fixed;    
+    top: 50%;
+    left: 50%;
+    border-radius: 30px;
+    transform: translate(-50%, -50%);
+    color: rgb(199, 52, 33);
+    font-weight: bold;   
+    background-color: rebeccapurple;
+}
+
+form table{
+
+    margin-left:auto;
+    margin-right: auto;
+    margin-top: 100px;
+    background-color: rgba(45, 126, 218, .7);
+    border-radius: 5px;
+   
+    padding: 30px 20px;    
+}
+
+.show{
+    display: block;
+}
+
+.hide{
+    display: none;
+}
