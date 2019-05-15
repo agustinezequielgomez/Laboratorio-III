@@ -10,7 +10,7 @@
                 "type": "firefox",
                 "request": "launch",
                 "reAttach": true,
-                "file": "${workspaceFolder}/Clases/Clase6/Ejemplo DOM - tabla - server - starter/index.html"
+                "file": "${workspaceFolder}/Clases/Clase7/Ejemplo DOM - tabla - server - full - starter/index.html"
             }
         ]
     

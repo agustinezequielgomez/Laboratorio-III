@@ -56,7 +56,7 @@ app.get('/traer', function (req, res) {
            array = array.filter(function(elemento){
                return elemento.active == 'true';
            })
-           res.send(array);
+           setTimeout(res.send(array),1000); 
         }
         catch(e){
             console.log(e);

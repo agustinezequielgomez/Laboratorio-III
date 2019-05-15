@@ -23,3 +23,18 @@ function agregarPersona(persona)
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(body));
 }
+
+function eliminarPersona(id)
+{
+    var body =
+    {
+        "collection":"personas",
+        "id":id
+    }
+    xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = eliminarPersona;
+    var cadena = "http://localhost:3000/eliminar";
+    xhr.open('POST',cadena,true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(body));
+}

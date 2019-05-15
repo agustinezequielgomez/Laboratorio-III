@@ -5,6 +5,7 @@ function procesarPersona()
         if(xhr.status == 200)
         {
             personas = JSON.parse(xhr.responseText);
+            document.getElementById('spinner').style.display='none';
             armarTabla();
         }
         else
@@ -12,9 +13,13 @@ function procesarPersona()
             alert("Error: " + xhr.status + " - " + xhr.statusText);
         }
     }
+    else
+    {
+        document.getElementById('spinner').style.display='block';
+    }
 }
 
-function enviarPersona(persona)
+function eliminarPersona(id)
 {
-    
+
 }
