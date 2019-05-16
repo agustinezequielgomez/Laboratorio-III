@@ -32,8 +32,24 @@ function eliminarPersona(id)
         "id":id
     }
     xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = eliminarPersona;
+    xhr.onreadystatechange = eliminarManejador;
     var cadena = "http://localhost:3000/eliminar";
+    xhr.open('POST',cadena,true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(body));
+}
+
+
+function modificarPersona(persona)
+{
+    var body =
+    {
+        "collection":"personas",
+        "objeto":persona
+    }
+    xhr = new XMLHttpRequest();
+    var cadena = "http://localhost:3000/modificar";
+    xhr.onreadystatechange = modificarManejador;
     xhr.open('POST',cadena,true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(body));

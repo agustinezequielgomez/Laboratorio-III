@@ -77,11 +77,38 @@ function armarTabla()
 
 function agregar()
 {
-    armarForm();
+    var inputs = document.getElementsByClassName('inputs');
+    console.log(inputs);
+    var persona = new Persona(inputs[0].value,inputs[1].value,inputs[2].value,inputs[3].value,inputs[4].value);
+    agregarPersona(persona);
+}
+
+function eliminar()
+{
+    var inputs = document.getElementsByClassName('inputs');
+    if(confirm("¿Seguro que desea eliminar a? " + inputs[2].value+", "+inputs[1].value)==true)
+    {
+        eliminarPersona(inputs[0].value);
+    }
+}
+
+function modificarIndex()
+{
+    var inputs = document.getElementsByClassName('inputs');
+    var persona = new Persona(inputs[0].value,inputs[1].value,inputs[2].value,inputs[3].value,inputs[4].value);
+    modificarPersona(persona);
 }
 
 function armarForm()
 {
+    var body = document.getElementsByTagName('body');
+    for(hijos of body[0].children)
+    {
+        if(hijos.nodeName == 'FORM')
+        {
+            return -1;
+        }
+    }
     var form = document.createElement('form');
     var header = document.getElementById('header');
     var inputs = [];
@@ -95,6 +122,11 @@ function armarForm()
         inputs[i].setAttribute('class','inputs');
         form.appendChild(inputs[i]);
         form.appendChild(document.createElement('br'));
+        if(header.children[i].innerText == 'id' || header.children[i].innerText == 'active')
+        {
+            inputs[i].setAttribute('disabled','true');
+        }
+        
     }
 
     if(this.className == 'tableRow')
@@ -107,11 +139,13 @@ function armarForm()
         modificar.setAttribute('id','btnModificar');
         modificar.setAttribute('type','button');
         modificar.append('Modificar');
+        modificar.addEventListener('click',modificarIndex);
         form.appendChild(modificar);
         var borrar = document.createElement('button');
         borrar.append('Borrar');
         borrar.setAttribute('id','btnBorrar');
         borrar.setAttribute('type','button');
+        borrar.addEventListener('click',eliminar);
         form.appendChild(borrar);
     }
     else if(this.id == 'btnAgregar')
@@ -119,7 +153,18 @@ function armarForm()
         var enviar = document.createElement('button');
         enviar.append("Enviar");
         enviar.setAttribute('type','button');
+        enviar.addEventListener('click',agregar);
         form.appendChild(enviar);
     }
     document.body.appendChild(form);
+}
+
+function Persona(id, nombre, apellido, email, genero)
+{
+    this.id = id;
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.email = email;
+    this.genero = genero;
+    this.active = "true";
 }
