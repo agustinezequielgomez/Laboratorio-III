@@ -154,6 +154,7 @@ function armarForm()
         enviar.append("Enviar");
         enviar.setAttribute('type','button');
         enviar.addEventListener('click',agregar);
+        form.setAttribute('class','frmAlta');
         form.appendChild(enviar);
     }
     document.body.appendChild(form);

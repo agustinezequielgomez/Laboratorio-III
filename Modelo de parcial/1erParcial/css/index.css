@@ -1,0 +1,94 @@
+#tableHeroes, .tableRow, #tableHeader, .tableRow td, #tableHeader th, #accionTabla
+{
+    border: 2px solid salmon;
+    border-collapse: collapse;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    font-display: auto;
+    text-align: center;
+}
+
+#tableheader
+{
+    background-color: blue;
+}
+
+.tableRow
+{
+    background-color: red;
+    transition: background-color 1s ease-in-out;
+}
+
+.tableRow:hover
+{
+    background-color: orange;
+}
+
+body
+{
+    background-color: rgb(73, 73, 214);
+}
+
+#tableHeroes
+{
+    position: relative;
+    left: 48em;
+}
+
+.tableRow td
+{
+    padding: 1em;
+}
+
+#banner
+{
+    position: relative;
+    left: 25em;
+    size: 1em;
+}
+
+#logo
+{
+    position: absolute;
+    width: 20em;
+    left: 30em;
+}
+
+#spinner
+{
+    position: fixed;
+    left: 60em;
+    top: 30em; 
+}
+
+button
+{
+    border: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1em;
+    font-display: auto;
+    text-align: center;
+    margin: 0.5em;
+    padding: 0.5em;
+}
+
+#btnCancelar
+{
+    position: absolute;
+    float: right;
+}
+
+#botonAgregar
+{
+    position: absolute;
+    left: 60em;
+    background-color: rgb(0, 255, 0);
+    transition: background-color 1s ease-in-out;
+
+}
+
+#botonAgregar:hover
+{
+    background-color: rgb(0, 202, 0);
+}

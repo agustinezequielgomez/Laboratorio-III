@@ -30,7 +30,7 @@ app.get('/traer', function (req, res) {
                 message: "Carga exitosa",
                 "data":array
            }
-           setTimeout(function(){res.send(response);},5000);
+           setTimeout(function(){res.send(response);},1000);
     });  
 });
 
@@ -46,6 +46,7 @@ app.post('/eliminar', function (req, res) {
            var objectToDelete = array.filter(function(a){
              return a.id == indice;
            });
+           console.log(objectToDelete);
           remove(objectToDelete[0]);
           require('fs').writeFileSync(__dirname + getPathFromCollection(req.body.collection), JSON.stringify(array));
           var response = {
@@ -65,7 +66,7 @@ app.post('/agregar', function (req, res) {
                  throw err; // error handling
             }else{
                 array = JSON.parse(data);
-                //nuevoObjeto.id = getID(array);
+                nuevoObjeto.id = getID(array);
                 nuevoObjeto.active = "true";
                 nuevoObjeto.created_dttm = new Date().toLocaleString();
                 array.push(nuevoObjeto);

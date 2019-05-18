@@ -7,6 +7,18 @@ table tr:nth-child(even){
     background-color: cadetblue;
 }
 
+
+table tr:nth-child(even):hover{
+    background-color: blue;
+    transition: background-color 0.5s;
+}
+
+table tr:nth-child(odd):hover
+{
+    background-color: red;
+    transition: background-color 0.5s;
+}
+
 #spinner{
     position: fixed;
     top:360px;
