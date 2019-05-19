@@ -1,0 +1,144 @@
+body
+{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(70, 40, 206);
+    box-sizing: content-box;
+}
+
+#tablaHeroes, #headerTabla, .tableRow, .tableRow td, #headerTabla th,#tablaHeroes td
+{
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.5em;
+}
+
+header>div>button
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
+}
+
+button
+{
+    border:none;
+    padding: 1em;
+}
+
+#btnAgregar
+{
+    background-color: rgb(42, 206, 42);
+    transition: background-color 0.5s ease-in-out;
+}
+
+#btnAgregar:hover
+{
+    background-color: rgb(0, 255, 0);
+}
+
+header>img, #spinner
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
+}
+
+#tablaForm td
+{
+    text-align: center;
+    max-width: 30%;
+    width: 50%;
+}
+
+.btnForm
+{
+    display:block;
+    width: 100%;
+    background-color: red;
+    transition: background-color 1s ease-in-out;
+}
+
+.inputForm:hover
+{
+    border: .2em solid black;
+    transition: border 1s ease-in-out;
+}
+
+.btnForm:hover
+{
+    background-color: orangered;
+}
+
+#tablaForm
+{
+    top: 1em;
+    background-color: orange;
+}
+
+#tablaHeroes,#tablaForm
+{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#headerTabla
+{
+    background-color: red;
+}
+
+.tableRow
+{
+    background-color: orange;
+    transition: background-color 1s ease-in-out;
+}
+
+.tableRow:hover
+{
+    background-color: red;
+}
+
+
+
+
+
+
+
+/*---------------------------------------------------------------------------------------------------------------*/
+#spinner {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+  }
+  #spinner div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 51px;
+    height: 51px;
+    margin: 6px;
+    border: 6px solid #fff;
+    border-radius: 50%;
+    animation: spinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fff transparent transparent transparent;
+  }
+  #spinner div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+  #spinner div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  #spinner div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  @keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
