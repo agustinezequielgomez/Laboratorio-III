@@ -2,7 +2,7 @@ var xhr;
 function traerAjax()
 {
     xhr = new XMLHttpRequest();
-    var url = "http://localhost:3000/traer?collection=heroes";
+    var url = "http://localhost:3000/traer?collection=users";
     xhr.onreadystatechange = traerManejador;
     xhr.open('GET',url,'true');
     xhr.send();
@@ -12,7 +12,7 @@ function enviarAjax(heroe)
 {
     var body=
     {
-        "collection":"heroes",
+        "collection":"users",
         "heroe":heroe
     }
     xhr = new XMLHttpRequest();
@@ -28,7 +28,7 @@ function modificarAjax(heroe)
 {
     var body=
     {
-        "collection":"heroes",
+        "collection":"users",
         "heroe":heroe
     }
     xhr = new XMLHttpRequest();
@@ -43,7 +43,7 @@ function borrarAjax(heroe)
 {
     var body=
     {
-        "collection":"heroes",
+        "collection":"users",
         "id":heroe.id
     }
     xhr= new XMLHttpRequest();

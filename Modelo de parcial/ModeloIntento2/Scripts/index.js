@@ -10,6 +10,14 @@ function armarTabla(heroes)
 {
     var tabla = document.createElement('table');
     tabla.id = 'tablaHeroes';
+    var header = crearHeader();
+    tabla.appendChild(header);
+    crearBody(tabla,header);
+    document.body.appendChild(tabla);
+}
+
+function crearHeader()
+{
     var header = document.createElement('tr');
     header.id = 'headerTabla';
     for(atributos in heroes[0])
@@ -18,20 +26,14 @@ function armarTabla(heroes)
         th.append(atributos);
         header.appendChild(th);
     }
-    tabla.appendChild(header);
+    return header;
+}
 
+function crearBody(tabla, header)
+{
     for(heroe of heroes)
     {
-        var atributosNuevos = encontrarAtributosNuevos(heroe,header.children);
-        if(atributosNuevos.length != 0)
-        {
-            for(atributos of atributosNuevos)
-            {
-                var th = document.createElement('th');
-                th.appendChild(document.createTextNode(atributos));
-                header.appendChild(th);
-            }
-        }
+        agregarAtributosNuevos(heroe,header);
         var tr = document.createElement('tr');
         tr.className = 'tableRow';
         tr.addEventListener('click',crearForm);
@@ -43,10 +45,31 @@ function armarTabla(heroes)
         }
         tabla.appendChild(tr);
     }
-    document.body.appendChild(tabla);
 }
 
-function crearForm()
+function agregarAtributosNuevos(heroe, header)
+{
+    var atributosNuevos = encontrarAtributosNuevos(heroe,header.children);
+    if(atributosNuevos.length != 0)
+    {
+        for(atributos of atributosNuevos)
+        {
+            var th = document.createElement('th');
+            th.appendChild(document.createTextNode(atributos));
+            header.appendChild(th);
+        }
+    }
+}
+
+function cargarInputs(caller,input, i)
+{
+    if(caller.className == 'tableRow')
+    {
+        input.value = caller.children[i].innerText;
+    }
+}
+
+function removerForm()
 {
     for(hijosBody of document.body.children)
     {
@@ -55,12 +78,15 @@ function crearForm()
             document.body.removeChild(hijosBody);
         }
     }
+}
+
+function armarForm(caller)
+{
     var form = document.createElement('form');
     form.id = 'formHeroe';
     var tabla = document.createElement('table');
     tabla.id = 'tablaForm';
     var header = document.getElementById('headerTabla');
-    var elementos = document.getElementsByClassName('tableRow');
     var i = 0;
     for(atributos of header.children)
     {
@@ -71,7 +97,7 @@ function crearForm()
         var td = document.createElement('td');
         td.appendChild(label);
         tr.appendChild(td);
-
+    
         var input = document.createElement('input');
         input.className = 'inputForm';
         var td = document.createElement('td');
@@ -81,16 +107,38 @@ function crearForm()
         {
             input.disabled = true;
         }
-        if(this.className == 'tableRow')
-        {
-            input.value = this.children[i].innerText;
-            i++;
-        }
+        cargarInputs(caller,input,i);
+        i++;
         tabla.appendChild(tr);
     }
+    var array = [tabla,form];
+    return array;
+}
 
+function crearForm()
+{
+    removerForm();
+    console.log(this.id);
+    var retornos = armarForm(this);
+    var tabla = retornos[0];
+    var form = retornos[1];
+    var tr;
     if(this.className == 'tableRow')
     {
+        tr = agregarControlesFormSeleccionar();
+    }
+    else if(this.id == 'btnAgregar')
+    {
+        tr = agregarControlesFormAgregar();
+    }
+    tr = agregarBotonCancelar(tr);
+    tabla.appendChild(tr);
+    form.appendChild(tabla);
+    document.body.appendChild(form);
+}
+
+function agregarControlesFormSeleccionar()
+{
         var tr = document.createElement('tr');
         var td = document.createElement('td');
         var modificar = document.createElement('button');
@@ -110,43 +158,48 @@ function crearForm()
         borrar.addEventListener('click',borrarHeroe);
         td.appendChild(borrar);
         tr.appendChild(td);
-    }
+        return tr;
+    
+}
 
-    if(this.id == 'btnAgregar')
-    {
-        var tr = document.createElement('tr');
-        var td = document.createElement('td');
-        var enviar = document.createElement('button');
-        enviar.id = 'btnEnviar';
-        enviar.className = 'btnForm';
-        enviar.innerText = 'Enviar';
-        enviar.type = 'button';
-        enviar.addEventListener('click',agregarHeroe);
-        td.appendChild(enviar);
-        tr.appendChild(td);
-    }
+function agregarControlesFormAgregar()
+{
+    var tr = document.createElement('tr');
+    var td = document.createElement('td');
+    var enviar = document.createElement('button');
+    enviar.id = 'btnEnviar';
+    enviar.className = 'btnForm';
+    enviar.innerText = 'Enviar';
+    enviar.type = 'button';
+    enviar.addEventListener('click',agregarHeroe);
+    td.appendChild(enviar);
+    tr.appendChild(td);
+    return tr;
+}
+
+function agregarBotonCancelar(tr)
+{
     var cancelar = document.createElement('button');
     cancelar.className = 'btnForm';
     cancelar.id = 'btnCancelar';
     cancelar.innerText = 'Cancelar';
     cancelar.addEventListener('click',function()
     {
-        document.body.removeChild(document.getElementById('formHeroe'));
+        removerForm();
     })
     var td = document.createElement('td');
     td.appendChild(cancelar);
     tr.appendChild(td);
-    tabla.appendChild(tr);
-    form.appendChild(tabla);
-    document.body.appendChild(form);
+    return tr;
 }
+
 
 function agregarHeroe()
 {
     var inputs = document.getElementsByClassName('inputForm');
     var heroe = new Heroe(getNextID(),inputs[1].value,inputs[2].value,inputs[3].value,inputs[4].value,inputs[5].value);
     enviarAjax(heroe);
-    document.body.removeChild(document.getElementById('formHeroe'));
+    removerForm();
 }
 
 function modificarHeroe()
@@ -154,7 +207,7 @@ function modificarHeroe()
     var inputs = document.getElementsByClassName('inputForm');
     var heroe = new Heroe(inputs[0].value,inputs[1].value,inputs[2].value,inputs[3].value,inputs[4].value,inputs[5].value);
     modificarAjax(heroe);
-    document.body.removeChild(document.getElementById('formHeroe'));
+    removerForm();
 }
 
 function borrarHeroe()
@@ -165,17 +218,16 @@ function borrarHeroe()
     {
         borrarAjax(heroe);
     }
-    document.body.removeChild(document.getElementById('formHeroe'));
+    removerForm();
 }
 
 function Heroe(id,nombre,apellido,alias,edad,lado)
 {
     this.id = id;
     this.nombre = nombre;
-    this.apellido = apellido;
-    this.alias = alias;
-    this.edad = edad;
-    this.lado = lado;
+    this.pass = apellido;
+    this.ip = alias;
+    this.pais = edad;
     this.active = true;
 }
 
