@@ -14,10 +14,8 @@ function asignarEventos() {
     traerPersonas();
 }
 
-function actualizarTabla(lista) 
+function crearHeader(tabla)
 {
-    var tabla = document.createElement('table');
-    tabla.id = "tablaLista";
     var header = document.createElement('tr');
     var theader = document.createElement('thead');
     theader.id = 'theader';
@@ -35,7 +33,14 @@ function actualizarTabla(lista)
     }
     theader.appendChild(header);
     tabla.appendChild(theader);
+    console.log(atributos);
+    return crearBody(tabla,atributos);
 
+}
+
+function crearBody(tabla,atributos)
+{
+    console.log(atributos);
     var tbody = document.createElement('tbody');
     tbody.id = 'bodyTabla';
     for(persona of lista)
@@ -56,6 +61,14 @@ function actualizarTabla(lista)
         tbody.appendChild(tr);
     }
     tabla.appendChild(tbody);
+    return tabla;
+}
+
+function actualizarTabla(lista) 
+{
+    var tabla = document.createElement('table');
+    tabla.id = "tablaLista";
+    tabla = crearHeader(tabla);
     document.body.appendChild(tabla);
 }
 
@@ -81,7 +94,6 @@ function crearFormulario()
     var tabla = document.createElement('table');
     var header = document.getElementById('theader');
     var i = 0;
-    console.log(header.children[0].children.length);
     for(i = 0; i< header.children[0].children.length; i++)
     {
         console.log(header.children[0].children[i].innerText);
@@ -144,25 +156,31 @@ function agregarBotonesRow(tabla, caller)
 {
     if(caller.id == 'tableRow')
     {
-        var tr = document.createElement('tr');
-        var modificar = document.createElement('button');
-        modificar.innerText = 'Modificar';
-        modificar.type = 'button';
-        modificar.className = 'btnForm';
-        modificar.addEventListener('click',modificacionPersona);
-        var td = document.createElement('td');
-        td.appendChild(modificar);
-        tr.appendChild(td);
-        var Eliminar = document.createElement('button');
-        Eliminar.innerText = 'Eliminar';
-        Eliminar.type = 'button';
-        Eliminar.className = 'btnForm';
-        Eliminar.addEventListener('click',eliminacionPersona);
-        var td = document.createElement('td');    
-        td.appendChild(Eliminar);
-        tr.appendChild(td);
-        agregarBotonCancelar(tabla,tr);
-        tabla.appendChild(tr);
+        var botones = ["Eliminar","Modificar","Cancelar"];
+        for(var i = 0 ; i<botones.length;i++)
+        {
+            var tr = document.createElement('tr');
+            var boton = document.createElement('button');
+            boton.innerText = botones[i];
+            boton.type = 'button';
+            boton.className = 'btnForm';
+            if(i == 0)
+            {
+                boton.addEventListener('click',eliminacionPersona);
+            }
+            else if(i==1)
+            {
+                boton.addEventListener('click',modificacionPersona);
+            }
+            else
+            {
+                boton.addEventListener('click',cerrarForm);
+            }
+            var td = document.createElement('td');
+            td.appendChild(boton);
+            tr.appendChild(td);
+            tabla.appendChild(tr);
+        }
     }
 }
 
@@ -180,31 +198,23 @@ function agregarBotonCancelar(tabla,tr)
 
 function agregarRadioButtons(table,caller)
 {
+    var labelValor = ["F","M"];
+    var id = ["Female","Male"]; 
     var tr = document.createElement('tr');    
-    var label = document.createElement('label');
-    label.className = 'labelForm';
-    label.innerText = "F";
-    tr.appendChild(label);
-    var input = document.createElement('input');
-    input.type = 'radio';
-    input.id = 'Female';
-    input.name = 'genero';
-    input.className = 'inputForm';
-    var td = document.createElement('td');
-    tr.appendChild(input);
-    cargarRadioButtons(caller,input);
-    var label = document.createElement('label');
-    label.className = 'labelForm';
-    label.innerText = "M";
-    tr.appendChild(label);
-    var input = document.createElement('input');
-    input.type = 'radio';
-    input.id = 'Male';
-    input.className = 'inputForm';
-    input.name = 'genero';
-    cargarRadioButtons(caller,input);    
-    var td = document.createElement('td');
-    tr.appendChild(input);
+    for(var i = 0; i<labelValor.length;i++)
+    {
+        var label = document.createElement('label');
+        label.className = 'labelForm';
+        label.innerText = labelValor[i];
+        tr.appendChild(label);
+        var input = document.createElement('input');
+        input.type = 'radio';
+        input.id = id[i];
+        input.name = 'genero';
+        input.className = 'inputForm';
+        cargarRadioButtons(caller,input);
+        tr.appendChild(input);
+    }
     table.appendChild(tr);
 }
 
@@ -212,6 +222,9 @@ function cargarRadioButtons(caller,input)
 {
     if(caller.id == 'tableRow')
     {
+        console.log(input.id);
+        console.log(caller.children[4].innerText);
+        console.log(caller.children[4].innerText=='Female');
         var validacion = caller.children[4].innerText=='Female';        
         if(validacion == true && input.id == 'Female')
         {
