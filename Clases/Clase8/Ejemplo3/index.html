@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- Bootstrap Minificado (codigo comprimido para facilitar su descarga) -->
+    <!--<link rel="stylesheet" href="./CSS/bootstrap.min.css"> -->
+    <!-- CDN: descargar el bootstrap de otro servidor 
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">-->
+    <!-- Manejador de paquetes -->
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <!-- Las clases son clases de bootstrap que ya tienen un comportamiento definido -->
+    <!-- Container-fluid hace que ocupe tood el ancho de la pagina
+         Container normal hace que centre el contenido 
+    -->
+    <!-- Medidas de Bootstrap: 
+        XL >= 1200px
+        LG >= 992 px
+        MD >= 768px
+        SM >= 576px
+        XM <= 576px
+        Por default, el tamaño de columna c/elemento es 12/cantidad de elementos (porque bootstrap tiene 12 columnas)
+
+        Si especifico el layout en los tamaños mas chicos, las proporciones de ese layout van a ser tomadas por los layouts mas grandes (Mobile-first)
+    
+    
+    -->
+    <div class="container" style="background-color:lightgrey">
+        <div class="row">
+            <div class="col-6" style="background-color: #aaa">
+                <h1>Columna1</h1>
+            </div>
+
+            <!-- Las columnas internas van a ocupar la mitad del tamaño de su padre (que es 6, ergo cada columna ocupa 3) -->
+            <div class="col-6" style="background-color: #bbb">
+                <h1>Columna2</h1>
+                <div class="row">
+                    <div class="col-6" style="background-color: #aaa">
+                        <h1>Columna2.1</h1>
+                    </div>
+                    <div class="col-6" style="background-color: #bbb">
+                        <h1>Columna2.2</h1>
+                    </div>
+                </div>
+            </div>
+            <!-- <h1>Hola Mundo</h1> -->
+        </div>
+</body>
+
+</html>
