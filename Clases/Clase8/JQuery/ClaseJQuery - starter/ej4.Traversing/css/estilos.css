@@ -1,0 +1,6 @@
+.ancestro *{
+display: block;
+border: 2px solid lightgray;
+padding: 5px;
+margin: 15px;    
+}
