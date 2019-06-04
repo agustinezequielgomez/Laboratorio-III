@@ -22,6 +22,7 @@ $(document).ready(function()
 
     $('#btnCambiar').click(function()
     {
+        $('#a2').html('Infobae no me gusta, aguante clarin');
         $('#a2').attr("href","http://www.clarin.com");
     });
 
