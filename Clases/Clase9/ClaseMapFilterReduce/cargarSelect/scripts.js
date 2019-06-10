@@ -1,6 +1,7 @@
-Array.prototype.unique=function(a){
-    return function(){return this.filter(a)}}(function(a,b,c){return c.indexOf(a,b+1)<0
-  });
+function onlyUnique(value, index, self) { 
+    return self.indexOf(value) === index;
+}
+
 $(function()
 {
     inicializarEventos();
@@ -9,14 +10,38 @@ $(function()
 function inicializarEventos()
 {
     cargarSelect();
+    cargarCiudades();
 }
 
 function cargarSelect()
 {
-    var paises = data.map(function(dato)
+    var paises = data
+    .map((datos)=>
     {
-        return dato.pais;
+        return datos.pais;
+    })
+    .filter(onlyUnique);
+    paises.forEach(pais => {
+        $('#paises').append('<option>'+pais+'</option>');
     });
-    var opcion = new Option;
-    $('#paises').add(opcion);
+    $('#paises').change(cargarCiudades)
+}
+
+function cargarCiudades()
+{
+    $('#ciudades').empty();
+    var paisSeleccionado = $('#paises').val();
+    var ciudades = data
+    .filter(function(dato)
+    {
+        return (dato.pais == paisSeleccionado);
+    })
+    .map(function(dato)
+    {
+        return dato.ciudad;
+    });
+    ciudades.forEach(ciudad=>
+        {
+            $('#ciudades').append('<option>'+ciudad+'</option>');
+        });
 }
