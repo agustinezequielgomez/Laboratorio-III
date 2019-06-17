@@ -1,3 +1,4 @@
+"use strict";
 //Defino el objeto y que campos tiene que tener (No hay chance de agregarle mas objetos teniendo esa firma)
 var Persona = {
     nombre: "Juan",

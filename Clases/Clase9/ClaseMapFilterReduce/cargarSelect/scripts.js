@@ -23,10 +23,11 @@ function cargarSelect()
     .filter(onlyUnique);
     paises.forEach(pais => {
         var $opcion = $('<option>');
-        $opcion.append(pais);
-        $('#paises').append($opcion);
         //Tambien posible como: 
         //$('#paises').append("<option>"+pais+"<option>");
+        ($opcion.append(pais)).appendTo('#paises');
+        //Tambien posible como:
+        //$('#paises').append($opcion);
     });
     $('#paises').change(cargarCiudades); //Change: evento que se dispara al seleccionar otro registro
 }

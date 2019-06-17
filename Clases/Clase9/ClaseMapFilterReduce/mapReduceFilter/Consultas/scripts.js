@@ -56,6 +56,20 @@ console.log(soluciones.usuariosMayores(data, 40));
   // Retornar un objeto que contenga solo el nombre y la edad del usuario mas grande.
 
 soluciones.usuarioMasGrande = function(usuarios){
+    oldestguy = usuarios.reduce((max,actual)=>
+    {
+        if(actual.edad>max.edad)
+        {
+            max = actual;
+        }
+        return max;
+    })
+    var array = [oldestguy];
+    return array.map((usuario)=>
+    {
+        return {"Nombre":usuario.nombre,"Edad":usuario.edad};
+    });
+    /*
     var max = 0;
     var edades = usuarios.map((usuario)=>
     {
@@ -77,7 +91,7 @@ soluciones.usuarioMasGrande = function(usuarios){
     .map((usuario)=>
     {
         return {"Nombre":usuario.nombre,"Edad":usuario.edad};
-    });
+    });*/
 }
 
 console.log(soluciones.usuarioMasGrande(data));
@@ -103,6 +117,7 @@ console.log("Promedio edad usuarios " + soluciones.promedio(data));
 // Retornar el promedio de edad de los usuarios hombres (number)
 
 soluciones.promedioVarones = function(usuarios){
+    var cantidad = 0;
    var edadesTotales = usuarios.filter((usuario)=>
    {
        return (usuario.genero == "Male");
@@ -113,9 +128,10 @@ soluciones.promedioVarones = function(usuarios){
    })
    .reduce((previo,actual)=>
    {
+       cantidad++;
        return previo+actual;
    })
-   return edadesTotales;
+   return (edadesTotales/cantidad).toFixed(2);
    
    /*
     var masculinos = usuarios.filter((usuario)=>
@@ -138,7 +154,21 @@ console.log("Promedio edad Varones " + soluciones.promedioVarones(data));
  // Retornar el promedio de edad de los usuarios mujeres (number)
 
 soluciones.promedioMujeres = function(usuarios){
-   
+    var cantidad = 0;
+    var edadesTotalesMujeres = usuarios.filter((mujeres)=>
+    {
+        return (mujeres.genero == "Female");
+    })
+    .map((edades)=>
+    {
+        return edades.edad;
+    })
+    .reduce((totales,actual)=>
+    {
+        cantidad++;
+        return actual+totales; 
+    });
+   return (edadesTotalesMujeres/cantidad).toFixed(2);
 }
 
-//console.log("Promedio edad Mujeres " + soluciones.promedioMujeres(data));
+console.log("Promedio edad Mujeres " + soluciones.promedioMujeres(data));

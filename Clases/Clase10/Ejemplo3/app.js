@@ -1,3 +1,4 @@
+"use strict";
 var x;
 var y = 20;
 if (x > y) //Tira que es undefined probablemente
