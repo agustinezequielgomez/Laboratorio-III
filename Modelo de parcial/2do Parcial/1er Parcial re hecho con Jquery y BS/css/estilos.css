@@ -1,0 +1,141 @@
+body
+{
+    z-index: -1;
+}
+.frmAlta{
+
+    width: 40%;
+    height: 400px;;
+    position: fixed;    
+    top: 50%;
+    left: 50%;
+    border-radius: 30px;
+    background-image: url("../images/avatar.jpg");
+    background-size: 50%;
+    background-color: rgba(45, 218, 117, 1 );
+    transform: translate(-50%, -50%);
+    color: rgb(199, 52, 33);
+    font-weight: bold;   
+}
+
+.frmAlta table
+{
+    position: relative;
+    right: 10em;
+}
+
+form table{
+
+    vertical-align: center;
+    margin-left: 250px;
+    margin-top: 70px;
+    background-color: rgba(45, 126, 218, .7);
+    border-radius: 5px;
+   
+    padding: 30px 20px;    
+}
+
+body{
+
+    background-color: rgb(96, 160, 245);
+    padding-top: 0px;
+    margin-left: 150px;
+    margin-right: 150px;
+
+}
+
+#tablaLista{
+    border: 1px solid black;
+    width: 50%;
+}
+
+#bodyTabla{
+    text-align: center;
+    border: 1px solid black;
+}
+
+#logo{
+    width: 500px;    
+    position: relative;
+    top: 50px;
+    left: 30px;
+    
+}
+
+header{
+    
+    margin-top: 0px;
+    height: 500px;    
+    background-image: url("../images/free-people-icon-vector.jpg");
+}
+
+#tablaLista{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+nav{
+    background-color: rgb(221, 67, 98);
+    padding: 10px;
+}
+
+#tablaLista tr{
+    background-color: rgb(221, 67, 98);
+    transition: background-color 0.5s ease-in-out;
+}
+
+#tablaLista th{
+    background-color: rgb(67, 82, 221);
+}
+
+#tablaLista tr:hover
+{
+    background-color: red;
+}
+
+#btnAlta{
+
+    border-radius: 5px;
+    height: 30px;
+    width: 80px;
+    background-color: rgb(109, 216, 136);
+    
+}
+
+.puntero{
+
+    cursor: pointer;
+}
+
+
+.btnForm
+{
+    border: none;
+    background-color: rgb(0, 255, 0);
+    transition: background-color 0.5s ease-in-out;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.btnForm:hover
+{
+    background-color: green;
+}
+
+#spinner
+{
+    position: relative;
+    left: 27em;
+    z-index: 2;
+}
+
+.show{
+    display: block;
+}
+
+.hide{
+    display: none;
+}
+
+
