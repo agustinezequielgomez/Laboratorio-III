@@ -3,9 +3,7 @@ body
     z-index: -1;
 }
 .frmAlta{
-
-    width: 40%;
-    height: 400px;;
+    padding: 1rem 5rem;
     position: fixed;    
     top: 50%;
     left: 50%;
@@ -39,8 +37,6 @@ body{
 
     background-color: rgb(96, 160, 245);
     padding-top: 0px;
-    margin-left: 150px;
-    margin-right: 150px;
 
 }
 
