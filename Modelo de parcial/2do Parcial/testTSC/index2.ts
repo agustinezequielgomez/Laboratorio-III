@@ -1,35 +1,53 @@
-var data = [{"id":1,"first_name":"Walliw","last_name":"Spurden","email":"wspurden0@reverbnation.com","gender":"Female","active":"true"},{"id":2,"first_name":"Calley","last_name":"Albion","email":"calbion1@goodreads.com","gender":"Female","active":"false"},{"first_name":"Juan","last_name":"Shearsby","email":"jshearsby2@discovery.com","gender":"Female","active":"true","id":"3"},{"id":4,"first_name":"Carlyn","last_name":"Jarnell","email":"cjarnell3@dedecms.com","gender":"Female","active":"true"},{"id":5,"first_name":"Maegan","last_name":"Lowbridge","email":"mlowbridge4@drupal.org","gender":"Female","active":"false"},{"id":6,"first_name":"Ambur","last_name":"Aloway","email":"aaloway5@pinterest.com","gender":"Female","active":"true"},{"id":7,"first_name":"Merola","last_name":"Bartocci","email":"mbartocci6@mozilla.com","gender":"Female","active":"false"},{"id":8,"first_name":"Phelia","last_name":"Vaz","email":"pvaz7@linkedin.com","gender":"Female","active":"false"},{"first_name":"gggg","last_name":"Stibbs","email":"lstibbs8@reddit.com","gender":"Male","active":"true","id":"9"},{"id":10,"first_name":"Brockie","last_name":"Tulleth","email":"btulleth9@flavors.me","gender":"Male","active":"false"},{"first_name":"Persona","last_name":"Nueva","email":"email","gender":"Female","active":false,"id":11},{"first_name":"Test","last_name":"asdasd","email":"asda","gender":"Female","active":false,"id":"12"}];
+var data = [{"id":1,"age":23,"first_name":"Walliw","last_name":"Spurden","email":"wspurden0@reverbnation.com","gender":"Female","active":"true"},{"id":2,"age":54,"first_name":"Calley","last_name":"Albion","email":"calbion1@goodreads.com","gender":"Female","active":"false"},{"first_name":"Juan","age":18,"last_name":"Shearsby","email":"jshearsby2@discovery.com","gender":"Female","active":"true","id":"3"},{"id":4,"age":65,"first_name":"Carlyn","last_name":"Jarnell","email":"cjarnell3@dedecms.com","gender":"Female","active":"true"},{"id":5,"age":55,"first_name":"Maegan","last_name":"Lowbridge","email":"mlowbridge4@drupal.org","gender":"Female","active":"false"},{"id":6,"age":77,"first_name":"Ambur","last_name":"Aloway","email":"aaloway5@pinterest.com","gender":"Female","active":"true"},{"id":7,"age":43,"first_name":"Merola","last_name":"Bartocci","email":"mbartocci6@mozilla.com","gender":"Female","active":"false"},{"id":8,"age":22,"first_name":"Phelia","last_name":"Vaz","email":"pvaz7@linkedin.com","gender":"Female","active":"false"},{"first_name":"gggg","age":43,"last_name":"Stibbs","email":"lstibbs8@reddit.com","gender":"Male","active":"true","id":"9"},{"id":10,"age":10,"first_name":"Brockie","last_name":"Tulleth","email":"btulleth9@flavors.me","gender":"Male","active":"false"},{"first_name":"Persona","age":33,"last_name":"Nueva","email":"email","gender":"Female","active":"true","id":11},{"first_name":"Test","age":80,"last_name":"asdasd","email":"asda","gender":"Female","active":"true","id":"12"}];
 var lista:object[];
-
+//Manejador pagina------------------------------------------------------------------------------------------------------------------
 $(document).ready(()=>
 {
     agregarContainer();
+    agregarSelect();
     if(localStorage.getItem('personas')==null)
     {
         localStorage.setItem('personas',JSON.stringify(data));
     }
+    else
+    {
+        lista = JSON.parse(localStorage.getItem('personas'));
+    }
+    $('#btnAlta').click(crearFormulario);
     setTimeout(()=>
     {
-        actualizarTabla();
+        updatePage();
         $('.spinner-border').hide();
     },500);
-    $('#btnAlta').click(crearFormulario);
 });
 
+function updatePage()
+{
+    $('.form-check').remove();
+    actualizarTabla();
+    agregarColumnFilter();
+    calcularPromedioEdad();
+    personaMasVieja();
+}
+//-------------------------------------------------------------------------------------------------------------------------------------
+
+//Creacion del DOM--------------------------------------------------------------------------------------------------------------------
 function agregarContainer()
 {
-    $('<div class="container">').prependTo('body');
+    $('<div class="container-fluid">').prependTo('body');
+    $('header').appendTo('.container-fluid');
+    $('nav').appendTo('.container-fluid');
 }
 
-function crearHeader(tabla:HTMLElement)
+function crearHeader(tabla:JQuery)
 {
-    var header:JQuery = $('<tr>');
-    var theader:JQuery = $('<thead class="thead-dark" id="theader">');
+    var header = $('<tr>');
+    var theader = $('<thead class="thead-dark" id="theader">');
     var atributos = [];
     for(let atributo in lista[0])
     {
         atributos.push(atributo);
-        var th = $('<th class="text-center">');
+        var th = $('<th class="text-center" id="'+atributo+'">');
         th.append(atributo);
         header.append(th);
     }
@@ -40,9 +58,9 @@ function crearHeader(tabla:HTMLElement)
 
 }
 
-function crearBody(tabla:HTMLElement,atributos:string[])
+function crearBody(tabla:JQuery,atributos:string[])
 {
-    console.log(atributos);
+    lista = obtenerPersonasFiltradas();
     var tbody = $('<tbody id="bodyTabla">');
     for(let persona of lista)
     {
@@ -71,18 +89,7 @@ function actualizarTabla()
     var tabla = $('<table class="table table-bordered" id="tablaLista">');
     tabla = crearHeader(tabla);
     tabla.appendTo(containerTabla);
-    $('body').append(containerTabla);
-}
-
-function getAttribs()
-{
-    var header:JQuery = $('#theader').children().children();
-    var attribs = [];
-    for(let th of header)
-    {
-        attribs.push(th.innerText);
-    }
-    return attribs;
+    $('.container-fluid').append(containerTabla);
 }
 
 function crearFormulario()
@@ -99,16 +106,16 @@ function crearFormulario()
         {
             return;
         }
-        var row = $('<div class="form-row">');
-        var formGroup = $('<div class="form-group align-items-center">');
+        var formGroupRow = $('<div class="form-group row align-items-center">');
+        var col = $('<div class="col-sm-12">');
         var label = $('<label id="'+atributo+'Label" for="'+atributo+'Input">');
         var input = $('<input type="text" class="form-control" id="'+atributo+'Input" required="required">');
         label.text(atributo);
-        label.appendTo(formGroup);
-        input.appendTo(formGroup);
-        formGroup.appendTo(row);
-        row.appendTo(formulario);
-        $('body').append(formulario);
+        label.appendTo(col);
+        input.appendTo(col);
+        col.appendTo(formGroupRow);
+        formGroupRow.appendTo(formulario);
+        $('.container-fluid').append(formulario);
         if(this.id == "tableRow")
         {
             $('#'+atributo+'Input').val(($(this).find('#'+atributo)).text())
@@ -119,32 +126,32 @@ function crearFormulario()
         }
     });
     agregarRadioButtons(this);
-    $(formulario).append('<div class="form-row"  id="botones">');
+    $(formulario).append('<div class="form-group row align-items-center" id="botones">');
     agregarBotonCancelar(this);
     agregarBotonEnviar(this);
     agregarBotonesRow(this);
 }
 
-function agregarBotonEnviar(caller:HTMLElement)
+function agregarBotonEnviar(caller)
 {
     if(caller.id == 'btnAlta')
     {
-        var row = $('<div class="form-group col-sm-6">');
-        var Enviar = $('<button type="button" class="btn btn-success form-control">Dar de alta</button>');
+        var col = $('<div class="col-sm-6">');
+        var Enviar = $('<button type="button" class="btn btn-success form-control">Enviar</button>');
         Enviar.click(altaPersona);
-        Enviar.appendTo(row);
-        row.appendTo('#botones');
+        Enviar.appendTo(col);
+        col.appendTo('#botones');
     }
 }
 
-function agregarBotonesRow(caller:HTMLElement)
+function agregarBotonesRow(caller:JQuery)
 {
     if(caller.id == 'tableRow')
     {
         var botones = ["Eliminar","Modificar"];
         for(let boton of botones)
         {
-            var row = $('<div class="form-group col-sm-4">');
+            var col = $('<div class="col-sm-4" >');
             var button = $('<button type="button" class="btn btn-primary form-control" id="'+boton+'Btn">'+boton+'</button>');
             if(boton == "Eliminar")
             {
@@ -154,30 +161,30 @@ function agregarBotonesRow(caller:HTMLElement)
             {
                 button.click(modificacionPersona);
             }
-            button.appendTo(row);
-            row.appendTo('#botones');
+            button.appendTo(col);
+            col.appendTo('#botones');
         }
     }
 }
 
-function agregarBotonCancelar(caller:HTMLElement)
+function agregarBotonCancelar(caller:JQuery)
 {
     var largo = 6;
     if(caller.id == 'tableRow')
     {
         largo = 4;
     }
-    var row = $('<div class="form-group col-sm-'+largo+'">');
+    var col = $('<div class="col-sm-'+largo+'">');
     var Cancelar = $('<button type="button" class="btn btn-danger form-control">Cancelar</button>');
     Cancelar.click(cerrarForm);
-    Cancelar.appendTo(row);
-    row.appendTo('#botones');
+    Cancelar.appendTo(col);
+    col.appendTo('#botones');
 }
 
-function agregarRadioButtons(caller:HTMLElement)
+function agregarRadioButtons(caller:JQuery)
 {
-    var row = $('<div class="form-row">');
-    var formGroup = $('<div class="form-group align-items-center">');
+    var row = $('<div class="form-group">');
+    var formGroup = $('<div class="form-row align-items-center">');
     var labelValor = ["F","M"];
     var id = ["Female","Male"];
     for(var i = 0; i<labelValor.length;i++)
@@ -193,7 +200,7 @@ function agregarRadioButtons(caller:HTMLElement)
     cargarRadioButtons(caller);
 }
 
-function cargarRadioButtons(caller:HTMLElement)
+function cargarRadioButtons(caller:JQuery)
 {
     if(caller.id == 'tableRow')
     {
@@ -207,6 +214,99 @@ function cargarRadioButtons(caller:HTMLElement)
 
         }
     }
+}
+
+function agregarSelect()
+{
+    var form = $('<form class="align-self-center" id="frmSelect">');
+    var titles = ["Filtrar por tipo","Promedio de edad","Persona mas vieja"];
+    var id= ["typeFilter","ageAvg","masGrande"];
+    var row = $('<div class="form-group form-row">').css('background-color','rgb(67, 82, 221)');
+    for(var i=0;i<titles.length;i++)
+    {
+        var col = $('<div class="form-group col-sm-4">');
+        if(titles[i]=="Filtrar por tipo")
+        {
+            var label = $('<label class="form-label">');
+            label.append(titles[i]);
+            var input = $('<select class="form-control" id="'+id[i]+'">');
+            input.append('<option>Seleccionar uno</option>');
+            input.append('<option>Male</option>');
+            input.append('<option>Female</option>');
+            input.change(calcularPromedioEdad);
+            input.change(personaMasVieja);
+            input.change(()=>
+            {
+                $('.table-responsive').remove();
+                actualizarTabla();
+            });
+            label.appendTo(col);
+            input.appendTo(col);
+        }
+        else
+        {
+            var label = $('<label class="form-label">');
+            label.append(titles[i]);
+            var input = $('<input type="text" class="form-control" id="'+id[i]+'" disabled="disabled">');
+            label.appendTo(col);
+            input.appendTo(col);
+        }
+        col.appendTo(row);
+        row.appendTo(form);
+    }
+    form.appendTo('.container-fluid');
+}
+
+function agregarColumnFilter()
+{
+    var form = $('#frmSelect');
+    var row = $('<div class="form-group form-row">').css('background-color','rgb(221, 67, 98)');
+    let atributos = getAttribs();
+    for(let atributo of atributos)
+    {
+        var formCheck = $('<div class="form-check col-md-1">');
+        var label = $('<label>');
+        label.append(atributo);
+        var check = $('<input type="checkbox" class="form-control" id="'+atributo+'Check">');
+        check.prop('checked',true);
+        check.change(actualizarColumnas);
+        label.appendTo(formCheck);
+        check.appendTo(formCheck);
+        formCheck.appendTo(row);
+    }
+    row.appendTo(form);
+}
+
+function actualizarColumnas()
+{
+    var atributos = getAttribs();
+    for(let atributo of atributos)
+    {
+        if($('#'+atributo+'Check').prop('checked')==false)
+        {
+            $('th#'+atributo).hide();
+            $('td#'+atributo).hide();
+        }
+        else
+        {
+            $('th#'+atributo).show();
+            $('td#'+atributo).show();
+        }
+    }
+}
+//--------------------------------------------------------------------------------------------------------------------------------
+
+
+//Funciones generales-------------------------------------------------------------------------------------------------------------
+function getAttribs()
+{
+    var header = $('#theader').children().children();
+    var attribs = [];
+    for(let th of header)
+    {
+        attribs.push(th.innerText);
+    }
+    return attribs;
 }
 
 function cerrarForm()
@@ -244,7 +344,7 @@ function traerUltimoId()
     {
         return persona.id;
     })
-    .reduce((maximo:Number,actual:Number)=>
+    .reduce((maximo:number,actual:number)=>
     {
         if(actual >maximo)
         {
@@ -254,6 +354,32 @@ function traerUltimoId()
     });
 }
 
+function obtenerPersonasFiltradas()
+{
+    var personas = JSON.parse(localStorage.getItem('personas'));
+    var listadoFiltrado = personas.filter((persona:object)=>
+    {
+        return (persona.active=="true");
+    });
+    if($('#typeFilter').val()=="Male")
+    {
+        var listadoFiltrado = listadoFiltrado.filter((persona:object)=>
+        {
+            return (persona.gender=="Male");
+        });
+    }
+    else if($('#typeFilter').val()=="Female")
+    {
+        var listadoFiltrado = listadoFiltrado.filter((persona:object)=>
+        {
+            return (persona.gender=="Female");
+        });
+    }
+    return listadoFiltrado;
+}
+//---------------------------------------------------------------------------------------------------------------------
+
+//ABM Local Storage----------------------------------------------------------------------------------------------------
 function altaPersona() 
 {
     if(validarCampos()!=0)
@@ -261,7 +387,7 @@ function altaPersona()
         alert("Es necesario ingresar todos los campos antes de continuar.");
         return -1;
     }
-    var persona:object = {};
+    var persona = {};
     var atributos = getAttribs();
     atributos.forEach((atributo)=>
     {
@@ -273,10 +399,10 @@ function altaPersona()
         persona[atributo] = $('#'+atributo+'Input').val();
     });
     persona.id = parseInt(traerUltimoId())+1;
-    persona.active= true;
+    persona.active= "true";
     guardarPersona(persona);
     removerObjetos();
-    actualizarTabla();
+    updatePage();
 }
 
 function guardarPersona(persona:object)
@@ -289,18 +415,17 @@ function guardarPersona(persona:object)
 
 function eliminacionPersona() 
 {
-    var inputs = document.getElementsByClassName('inputForm');
     if(confirm("¿Desea eliminar a " + $('#first_nameInput').val() +", " +$('#last_nameInput').val()+"?"))
     {
         eliminarPersona($('#idInput').val());
         removerObjetos();        
-        actualizarTabla();
+        updatePage();
     }
 }
 
-function eliminarPersona(id)
+function eliminarPersona(id:number)
 {
-    let personas:object = JSON.parse(localStorage.getItem('personas'));
+    let personas = JSON.parse(localStorage.getItem('personas'));
     personas.forEach((persona:object)=>
     {
         if(persona.id == id)
@@ -343,5 +468,44 @@ function modificacionPersona()
     localStorage.removeItem('personas');
     localStorage.setItem('personas',JSON.stringify(personas));
     removerObjetos();
-    actualizarTabla();
+    updatePage();
 }
+//-----------------------------------------------------------------------------------------------------------
+
+
+//Map/Reduce/Filter-----------------------------------------------------------------------------------------
+function calcularPromedioEdad()
+{
+    var contador = 0;
+    var listadoFiltrado = obtenerPersonasFiltradas();
+    var promedio = listadoFiltrado.map((persona:object)=>
+    {
+        return persona.age;
+    })
+    .reduce((acumulado:number,actual:number)=>
+    {
+        contador++;
+        return acumulado += parseInt(actual);
+    },0);
+    $('#ageAvg').val((promedio/contador));
+}
+
+function personaMasVieja()
+{
+    var listadoFiltrado = obtenerPersonasFiltradas();
+    var personaMasVieja = listadoFiltrado.reduce((maximo:number,actual:number)=>
+    {
+        if(parseInt(actual.age) > parseInt(maximo.age))
+        {
+            maximo = actual;
+        }
+        return maximo;
+    });
+    var oldest = [personaMasVieja];
+    personaMasVieja = oldest.map((persona)=>
+    {
+        return persona.first_name;
+    });
+    $('#masGrande').val(personaMasVieja);
+}
+//-------------------------------------------------------------------------------------------------------------
