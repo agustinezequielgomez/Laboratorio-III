@@ -8,10 +8,6 @@ $(document).ready(()=>
     {
         localStorage.setItem('personas',JSON.stringify(data));
     }
-    else
-    {
-        lista = localStorage.getItem('personas');
-    }
     setTimeout(()=>
     {
         actualizarTabla();
@@ -20,12 +16,9 @@ $(document).ready(()=>
     $('#btnAlta').click(crearFormulario);
 });
 
-//Creacion del DOM-----------------------------------------------------------------------------------------------
 function agregarContainer()
 {
-    $('<div class="container-fluid">').prependTo('body');
-    $('header').appendTo('.container-fluid');
-    $('nav').appendTo('.container-fluid');
+    $('<div class="container">').prependTo('body');
 }
 
 function crearHeader(tabla)
@@ -78,10 +71,19 @@ function actualizarTabla()
     var tabla = $('<table class="table table-bordered" id="tablaLista">');
     tabla = crearHeader(tabla);
     tabla.appendTo(containerTabla);
-    $('.container-fluid').append(containerTabla);
+    $('body').append(containerTabla);
 }
 
-
+function getAttribs()
+{
+    var header = $('#theader').children().children();
+    var attribs = [];
+    for(th of header)
+    {
+        attribs.push(th.innerText);
+    }
+    return attribs;
+}
 
 function crearFormulario()
 {
@@ -97,16 +99,16 @@ function crearFormulario()
         {
             return;
         }
-        var formGroupRow = $('<div class="form-group row align-items-center">');
-        var col = $('<div class="col-sm-12">');
+        var row = $('<div class="form-row">');
+        var formGroup = $('<div class="form-group align-items-center">');
         var label = $('<label id="'+atributo+'Label" for="'+atributo+'Input">');
         var input = $('<input type="text" class="form-control" id="'+atributo+'Input" required="required">');
         label.text(atributo);
-        label.appendTo(col);
-        input.appendTo(col);
-        col.appendTo(formGroupRow);
-        formGroupRow.appendTo(formulario);
-        $('.container-fluid').append(formulario);
+        label.appendTo(formGroup);
+        input.appendTo(formGroup);
+        formGroup.appendTo(row);
+        row.appendTo(formulario);
+        $('body').append(formulario);
         if(this.id == "tableRow")
         {
             $('#'+atributo+'Input').val(($(this).find('#'+atributo)).text())
@@ -117,7 +119,7 @@ function crearFormulario()
         }
     });
     agregarRadioButtons(this);
-    $(formulario).append('<div class="form-group row align-items-center" id="botones">');
+    $(formulario).append('<div class="form-row"  id="botones">');
     agregarBotonCancelar(this);
     agregarBotonEnviar(this);
     agregarBotonesRow(this);
@@ -127,11 +129,11 @@ function agregarBotonEnviar(caller)
 {
     if(caller.id == 'btnAlta')
     {
-        var col = $('<div class="col-sm-6">');
-        var Enviar = $('<button type="button" class="btn btn-success form-control">Enviar</button>');
+        var row = $('<div class="form-group col-sm-6">');
+        var Enviar = $('<button type="button" class="btn btn-success form-control">Dar de alta</button>');
         Enviar.click(altaPersona);
-        Enviar.appendTo(col);
-        col.appendTo('#botones');
+        Enviar.appendTo(row);
+        row.appendTo('#botones');
     }
 }
 
@@ -142,7 +144,7 @@ function agregarBotonesRow(caller)
         var botones = ["Eliminar","Modificar"];
         for(boton of botones)
         {
-            var col = $('<div class="col-sm-4" >');
+            var row = $('<div class="form-group col-sm-4">');
             var button = $('<button type="button" class="btn btn-primary form-control" id="'+boton+'Btn">'+boton+'</button>');
             if(boton == "Eliminar")
             {
@@ -152,8 +154,8 @@ function agregarBotonesRow(caller)
             {
                 button.click(modificacionPersona);
             }
-            button.appendTo(col);
-            col.appendTo('#botones');
+            button.appendTo(row);
+            row.appendTo('#botones');
         }
     }
 }
@@ -165,24 +167,24 @@ function agregarBotonCancelar(caller)
     {
         largo = 4;
     }
-    var col = $('<div class="col-sm-'+largo+'">');
+    var row = $('<div class="form-group col-sm-'+largo+'">');
     var Cancelar = $('<button type="button" class="btn btn-danger form-control">Cancelar</button>');
     Cancelar.click(cerrarForm);
-    Cancelar.appendTo(col);
-    col.appendTo('#botones');
+    Cancelar.appendTo(row);
+    row.appendTo('#botones');
 }
 
 function agregarRadioButtons(caller)
 {
-    var row = $('<div class="form-group">');
-    var formGroup = $('<div class="form-row align-items-center">');
+    var row = $('<div class="form-row">');
+    var formGroup = $('<div class="form-group align-items-center">');
     var labelValor = ["F","M"];
     var id = ["Female","Male"];
     for(var i = 0; i<labelValor.length;i++)
     {
         var label = $('<label class="radio-inline col-sm-6" id="genderLabel">'+labelValor[i]+'</label>');
         var input = $('<input type="radio" name="gender" value="'+id[i]+'" class="form-control" id="'+id[i]+'">');
-        cargarRadioButtons(this);
+        cargarRadioButtons(this,input);
         input.appendTo(label);
         label.appendTo(formGroup);
     }
@@ -191,7 +193,7 @@ function agregarRadioButtons(caller)
     cargarRadioButtons(caller);
 }
 
-function cargarRadioButtons(caller)
+function cargarRadioButtons(caller,input)
 {
     if(caller.id == 'tableRow')
     {
@@ -205,19 +207,6 @@ function cargarRadioButtons(caller)
 
         }
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------
-//Funciones generales--------------------------------------------------------------------------------------------
-function getAttribs()
-{
-    var header = $('#theader').children().children();
-    var attribs = [];
-    for(th of header)
-    {
-        attribs.push(th.innerText);
-    }
-    return attribs;
 }
 
 function cerrarForm()
@@ -264,9 +253,7 @@ function traerUltimoId()
         return maximo;
     });
 }
-//------------------------------------------------------------------------------------------------------------------------------------------------------
 
-//ABM local storage-------------------------------------------------------------------------------------------------------------------------------------
 function altaPersona() 
 {
     if(validarCampos()!=0)

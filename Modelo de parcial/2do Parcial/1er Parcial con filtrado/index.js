@@ -1,9 +1,10 @@
-var data = [{"id":1,"first_name":"Walliw","last_name":"Spurden","email":"wspurden0@reverbnation.com","gender":"Female","active":"true"},{"id":2,"first_name":"Calley","last_name":"Albion","email":"calbion1@goodreads.com","gender":"Female","active":"false"},{"first_name":"Juan","last_name":"Shearsby","email":"jshearsby2@discovery.com","gender":"Female","active":"true","id":"3"},{"id":4,"first_name":"Carlyn","last_name":"Jarnell","email":"cjarnell3@dedecms.com","gender":"Female","active":"true"},{"id":5,"first_name":"Maegan","last_name":"Lowbridge","email":"mlowbridge4@drupal.org","gender":"Female","active":"false"},{"id":6,"first_name":"Ambur","last_name":"Aloway","email":"aaloway5@pinterest.com","gender":"Female","active":"true"},{"id":7,"first_name":"Merola","last_name":"Bartocci","email":"mbartocci6@mozilla.com","gender":"Female","active":"false"},{"id":8,"first_name":"Phelia","last_name":"Vaz","email":"pvaz7@linkedin.com","gender":"Female","active":"false"},{"first_name":"gggg","last_name":"Stibbs","email":"lstibbs8@reddit.com","gender":"Male","active":"true","id":"9"},{"id":10,"first_name":"Brockie","last_name":"Tulleth","email":"btulleth9@flavors.me","gender":"Male","active":"false"},{"first_name":"Persona","last_name":"Nueva","email":"email","gender":"Female","active":false,"id":11},{"first_name":"Test","last_name":"asdasd","email":"asda","gender":"Female","active":false,"id":"12"}];
+var data = [{"id":1,"age":23,"first_name":"Walliw","last_name":"Spurden","email":"wspurden0@reverbnation.com","gender":"Female","active":"true"},{"id":2,"age":54,"first_name":"Calley","last_name":"Albion","email":"calbion1@goodreads.com","gender":"Female","active":"false"},{"first_name":"Juan","age":18,"last_name":"Shearsby","email":"jshearsby2@discovery.com","gender":"Female","active":"true","id":"3"},{"id":4,"age":65,"first_name":"Carlyn","last_name":"Jarnell","email":"cjarnell3@dedecms.com","gender":"Female","active":"true"},{"id":5,"age":55,"first_name":"Maegan","last_name":"Lowbridge","email":"mlowbridge4@drupal.org","gender":"Female","active":"false"},{"id":6,"age":77,"first_name":"Ambur","last_name":"Aloway","email":"aaloway5@pinterest.com","gender":"Female","active":"true"},{"id":7,"age":43,"first_name":"Merola","last_name":"Bartocci","email":"mbartocci6@mozilla.com","gender":"Female","active":"false"},{"id":8,"age":22,"first_name":"Phelia","last_name":"Vaz","email":"pvaz7@linkedin.com","gender":"Female","active":"false"},{"first_name":"gggg","age":43,"last_name":"Stibbs","email":"lstibbs8@reddit.com","gender":"Male","active":"true","id":"9"},{"id":10,"age":10,"first_name":"Brockie","last_name":"Tulleth","email":"btulleth9@flavors.me","gender":"Male","active":"false"},{"first_name":"Persona","age":33,"last_name":"Nueva","email":"email","gender":"Female","active":"true","id":11},{"first_name":"Test","age":80,"last_name":"asdasd","email":"asda","gender":"Female","active":"true","id":"12"}];
 var lista;
-
+//Manejador pagina------------------------------------------------------------------------------------------------------------------
 $(document).ready(()=>
 {
     agregarContainer();
+    agregarSelect();
     if(localStorage.getItem('personas')==null)
     {
         localStorage.setItem('personas',JSON.stringify(data));
@@ -12,15 +13,25 @@ $(document).ready(()=>
     {
         lista = localStorage.getItem('personas');
     }
+    $('#btnAlta').click(crearFormulario);
     setTimeout(()=>
     {
-        actualizarTabla();
+        updatePage();
         $('.spinner-border').hide();
     },500);
-    $('#btnAlta').click(crearFormulario);
 });
 
-//Creacion del DOM-----------------------------------------------------------------------------------------------
+function updatePage()
+{
+    $('.form-check').remove();
+    actualizarTabla();
+    agregarColumnFilter();
+    calcularPromedioEdad();
+    personaMasVieja();
+}
+//-------------------------------------------------------------------------------------------------------------------------------------
+
+//Creacion del DOM--------------------------------------------------------------------------------------------------------------------
 function agregarContainer()
 {
     $('<div class="container-fluid">').prependTo('body');
@@ -36,7 +47,7 @@ function crearHeader(tabla)
     for(atributo in lista[0])
     {
         atributos.push(atributo);
-        var th = $('<th class="text-center">');
+        var th = $('<th class="text-center" id="'+atributo+'">');
         th.append(atributo);
         header.append(th);
     }
@@ -49,7 +60,7 @@ function crearHeader(tabla)
 
 function crearBody(tabla,atributos)
 {
-    console.log(atributos);
+    lista = obtenerPersonasFiltradas();
     var tbody = $('<tbody id="bodyTabla">');
     for(persona of lista)
     {
@@ -80,8 +91,6 @@ function actualizarTabla()
     tabla.appendTo(containerTabla);
     $('.container-fluid').append(containerTabla);
 }
-
-
 
 function crearFormulario()
 {
@@ -207,8 +216,88 @@ function cargarRadioButtons(caller)
     }
 }
 
-//---------------------------------------------------------------------------------------------------------------
-//Funciones generales--------------------------------------------------------------------------------------------
+function agregarSelect()
+{
+    var form = $('<form class="align-self-center" id="frmSelect">');
+    var titles = ["Filtrar por tipo","Promedio de edad","Persona mas vieja"];
+    var id= ["typeFilter","ageAvg","masGrande"];
+    var row = $('<div class="form-group form-row">').css('background-color','rgb(67, 82, 221)');
+    for(var i=0;i<titles.length;i++)
+    {
+        var col = $('<div class="form-group col-sm-4">');
+        if(titles[i]=="Filtrar por tipo")
+        {
+            var label = $('<label class="form-label">');
+            label.append(titles[i]);
+            var input = $('<select class="form-control" id="'+id[i]+'">');
+            input.append('<option>Seleccionar uno</option>');
+            input.append('<option>Male</option>');
+            input.append('<option>Female</option>');
+            input.change(calcularPromedioEdad);
+            input.change(personaMasVieja);
+            input.change(()=>
+            {
+                $('.table-responsive').remove();
+                actualizarTabla();
+            });
+            label.appendTo(col);
+            input.appendTo(col);
+        }
+        else
+        {
+            var label = $('<label class="form-label">');
+            label.append(titles[i]);
+            var input = $('<input type="text" class="form-control" id="'+id[i]+'" disabled="disabled">');
+            label.appendTo(col);
+            input.appendTo(col);
+        }
+        col.appendTo(row);
+        row.appendTo(form);
+    }
+    form.appendTo('.container-fluid');
+}
+
+function agregarColumnFilter()
+{
+    var form = $('#frmSelect');
+    var row = $('<div class="form-group form-row">').css('background-color','rgb(221, 67, 98)');
+    atributos = getAttribs();
+    for(atributo of atributos)
+    {
+        var formCheck = $('<div class="form-check col-md-1">');
+        var label = $('<label>');
+        label.append(atributo);
+        var check = $('<input type="checkbox" class="form-control" id="'+atributo+'Check">');
+        check.prop('checked',true);
+        check.change(actualizarColumnas);
+        label.appendTo(formCheck);
+        check.appendTo(formCheck);
+        formCheck.appendTo(row);
+    }
+    row.appendTo(form);
+}
+
+function actualizarColumnas()
+{
+    var atributos = getAttribs();
+    for(atributo of atributos)
+    {
+        if($('#'+atributo+'Check').prop('checked')==false)
+        {
+            $('th#'+atributo).hide();
+            $('td#'+atributo).hide();
+        }
+        else
+        {
+            $('th#'+atributo).show();
+            $('td#'+atributo).show();
+        }
+    }
+}
+//--------------------------------------------------------------------------------------------------------------------------------
+
+
+//Funciones generales-------------------------------------------------------------------------------------------------------------
 function getAttribs()
 {
     var header = $('#theader').children().children();
@@ -264,9 +353,33 @@ function traerUltimoId()
         return maximo;
     });
 }
-//------------------------------------------------------------------------------------------------------------------------------------------------------
 
-//ABM local storage-------------------------------------------------------------------------------------------------------------------------------------
+function obtenerPersonasFiltradas()
+{
+    var personas = JSON.parse(localStorage.getItem('personas'));
+    var listadoFiltrado = personas.filter((persona)=>
+    {
+        return (persona.active=="true");
+    });
+    if($('#typeFilter').val()=="Male")
+    {
+        var listadoFiltrado = listadoFiltrado.filter((persona)=>
+        {
+            return (persona.gender=="Male");
+        });
+    }
+    else if($('#typeFilter').val()=="Female")
+    {
+        var listadoFiltrado = listadoFiltrado.filter((persona)=>
+        {
+            return (persona.gender=="Female");
+        });
+    }
+    return listadoFiltrado;
+}
+//---------------------------------------------------------------------------------------------------------------------
+
+//ABM Local Storage----------------------------------------------------------------------------------------------------
 function altaPersona() 
 {
     if(validarCampos()!=0)
@@ -286,10 +399,10 @@ function altaPersona()
         persona[atributo] = $('#'+atributo+'Input').val();
     });
     persona.id = parseInt(traerUltimoId())+1;
-    persona.active= true;
+    persona.active= "true";
     guardarPersona(persona);
     removerObjetos();
-    actualizarTabla();
+    updatePage();
 }
 
 function guardarPersona(persona)
@@ -302,12 +415,11 @@ function guardarPersona(persona)
 
 function eliminacionPersona() 
 {
-    var inputs = document.getElementsByClassName('inputForm');
     if(confirm("¿Desea eliminar a " + $('#first_nameInput').val() +", " +$('#last_nameInput').val()+"?"))
     {
         eliminarPersona($('#idInput').val());
         removerObjetos();        
-        actualizarTabla();
+        updatePage();
     }
 }
 
@@ -356,5 +468,44 @@ function modificacionPersona()
     localStorage.removeItem('personas');
     localStorage.setItem('personas',JSON.stringify(personas));
     removerObjetos();
-    actualizarTabla();
+    updatePage();
 }
+//-----------------------------------------------------------------------------------------------------------
+
+
+//Map/Reduce/Filter-----------------------------------------------------------------------------------------
+function calcularPromedioEdad()
+{
+    var contador = 0;
+    var listadoFiltrado = obtenerPersonasFiltradas();
+    var promedio = listadoFiltrado.map((persona)=>
+    {
+        return persona.age;
+    })
+    .reduce((acumulado,actual)=>
+    {
+        contador++;
+        return acumulado += parseInt(actual);
+    },0);
+    $('#ageAvg').val((promedio/contador));
+}
+
+function personaMasVieja()
+{
+    var listadoFiltrado = obtenerPersonasFiltradas();
+    var personaMasVieja = listadoFiltrado.reduce((maximo,actual)=>
+    {
+        if(parseInt(actual.age) > parseInt(maximo.age))
+        {
+            maximo = actual;
+        }
+        return maximo;
+    });
+    var oldest = [personaMasVieja];
+    personaMasVieja = oldest.map((persona)=>
+    {
+        return persona.first_name;
+    });
+    $('#masGrande').val(personaMasVieja);
+}
+//-------------------------------------------------------------------------------------------------------------
