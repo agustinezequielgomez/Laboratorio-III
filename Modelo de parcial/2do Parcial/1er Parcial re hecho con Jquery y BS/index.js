@@ -127,7 +127,7 @@ function agregarBotonEnviar(caller)
 {
     if(caller.id == 'btnAlta')
     {
-        var col = $('<div class="col-sm-6">');
+        var col = $('<div class="col-lg-6">');
         var Enviar = $('<button type="button" class="btn btn-success form-control">Enviar</button>');
         Enviar.click(altaPersona);
         Enviar.appendTo(col);
@@ -142,7 +142,7 @@ function agregarBotonesRow(caller)
         var botones = ["Eliminar","Modificar"];
         for(boton of botones)
         {
-            var col = $('<div class="col-sm-4" >');
+            var col = $('<div class="col-lg-4" >');
             var button = $('<button type="button" class="btn btn-primary form-control" id="'+boton+'Btn">'+boton+'</button>');
             if(boton == "Eliminar")
             {
@@ -165,7 +165,7 @@ function agregarBotonCancelar(caller)
     {
         largo = 4;
     }
-    var col = $('<div class="col-sm-'+largo+'">');
+    var col = $('<div class="col-lg-'+largo+'">');
     var Cancelar = $('<button type="button" class="btn btn-danger form-control">Cancelar</button>');
     Cancelar.click(cerrarForm);
     Cancelar.appendTo(col);
